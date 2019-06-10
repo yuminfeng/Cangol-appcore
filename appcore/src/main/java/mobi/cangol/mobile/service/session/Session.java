@@ -132,33 +132,33 @@ public class Session {
     }
 
     public void saveInt(String key, int value) {
-        getShared().edit().putInt(key, value).commit();
+        getShared().edit().putInt(key, value).apply();
         mMap.put(key, value);
     }
 
     public void saveBoolean(String key, boolean value) {
-        getShared().edit().putBoolean(key, value).commit();
+        getShared().edit().putBoolean(key, value).apply();
         mMap.put(key, value);
     }
 
     public void saveFloat(String key, float value) {
-        getShared().edit().putFloat(key, value).commit();
+        getShared().edit().putFloat(key, value).apply();
         mMap.put(key, value);
     }
 
     public void saveLong(String key, long value) {
-        getShared().edit().putLong(key, value).commit();
+        getShared().edit().putLong(key, value).apply();
         mMap.put(key, value);
     }
 
     public void saveString(String key, String value) {
-        getShared().edit().putString(key, value).commit();
+        getShared().edit().putString(key, value).apply();
         mMap.put(key, value);
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public void saveStringSet(String key, Set<String> value) {
-        getShared().edit().putStringSet(key, value).commit();
+        getShared().edit().putStringSet(key, value).apply();
         mMap.put(key, value);
     }
 
@@ -214,7 +214,7 @@ public class Session {
                 saveInt(key, (Integer) map.get(key));
             } else if (map.get(key) instanceof Long) {
                 saveLong(key, (Long) map.get(key));
-            } else if (map.get(key) instanceof Set && Build.VERSION.SDK_INT >= 11) {
+            } else if (map.get(key) instanceof Set) {
                 saveStringSet(key, (Set<String>) map.get(key));
             } else if (map.get(key) instanceof JSONObject) {
                 saveJSONObject(key, (JSONObject) map.get(key));
@@ -246,7 +246,7 @@ public class Session {
 
     public void remove(final String key) {
         mMap.remove(key);
-        getShared().edit().remove(key).commit();
+        getShared().edit().remove(key).apply();
         mCoreApplication.post(new Runnable() {
             @Override
             public void run() {
@@ -263,7 +263,7 @@ public class Session {
 
     public void clearAll() {
         mMap.clear();
-        getShared().edit().clear().commit();
+        getShared().edit().clear().apply();
         mCoreApplication.post(new Runnable() {
             @Override
             public void run() {
