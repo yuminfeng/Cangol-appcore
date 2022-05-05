@@ -177,7 +177,7 @@ class AnalyticsServiceImpl extends ITrackerHandler implements AnalyticsService {
         params.put("channelId", getChannelID(mContext));
         params.put("appId", getAppID(mContext));
         params.put("appVersion", DeviceInfo.getAppVersion(mContext));
-        params.put("sdkVersion", BuildConfig.VERSION_NAME);
+//        params.put("sdkVersion", BuildConfig.VERSION_NAME);
         params.put("timestamp", TimeUtils.getCurrentTime());
         StrictMode.setThreadPolicy(oldPolicy);
         return params;
