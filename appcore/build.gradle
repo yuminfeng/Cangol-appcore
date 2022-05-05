@@ -46,6 +46,15 @@ android {
             testCoverageEnabled true
         }
     }
+
+    //自定义aar名称
+    android.libraryVariants.all {
+        variant ->
+            variant.outputs.all {
+                def fileName = "${POM_NAME}" + "_V" + "${POM_VERSION}" + ".aar"
+                outputFileName = fileName
+            }
+    }
 }
 
 android.libraryVariants.all { variant ->
