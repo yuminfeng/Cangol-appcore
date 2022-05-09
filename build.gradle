@@ -5,6 +5,8 @@ buildscript {
     ext.target_version = 30
     ext.build_version = '30.0.2'
 
+    ext.kotlin_version = '1.4.10'
+
     repositories {
         maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         google()
@@ -18,6 +20,8 @@ buildscript {
 //        classpath "net.saliman:gradle-cobertura-plugin:3.0.0"
         classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
         classpath 'mobi.cangol.mobile:fir-gradle-plugin:2.1.0'
+
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 allprojects {
