@@ -319,8 +319,8 @@ public class CoreApplication extends Application {
      *
      * @return
      */
-    public final Session getSession() {
-        return  ((SessionService)getAppService(AppService.SESSION_SERVICE)).getSession();
+    public final SessionService getSession() {
+        return (SessionService) getAppService(AppService.SESSION_SERVICE);
     }
 
     /**
