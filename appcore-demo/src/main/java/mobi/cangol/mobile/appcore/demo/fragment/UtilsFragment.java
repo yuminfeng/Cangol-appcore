@@ -59,7 +59,7 @@ public class UtilsFragment extends Fragment {
                 sb.append("\nAppVersion="+DeviceInfo.getAppVersion(getContext()));
                 sb.append("\nSHA1Fingerprint="+DeviceInfo.getSHA1Fingerprint(getContext()));
                 sb.append("\nMD5Fingerprint="+DeviceInfo.getMD5Fingerprint(getContext()));
-                sb.append("\nDeviceId="+DeviceInfo.getDeviceId(getContext()));
+//                sb.append("\nDeviceId="+DeviceInfo.getDeviceId(getContext()));
                 sb.append("\ngetMobileInfo="+DeviceInfo.getMobileInfo()+"\n---------|\n");
                 sb.append("\nMemTotalSize="+DeviceInfo.getMemTotalSize());
                 sb.append("\nMemFreeSize="+DeviceInfo.getMemFreeSize());
@@ -81,14 +81,14 @@ public class UtilsFragment extends Fragment {
                 sb.append("\nisWifiConnection="+DeviceInfo.isWifiConnection(getContext()));
                 sb.append("\ngetIpStr="+DeviceInfo.getIpStr(getContext()));
                 sb.append("\ngetIpAddress="+DeviceInfo.getIpAddress(getContext()));
-                sb.append("\nMacAddress="+DeviceInfo.getMacAddress(getContext()));
+//                sb.append("\nMacAddress="+DeviceInfo.getMacAddress(getContext()));
 
                 sb.append("\nNetworkOperatorName="+DeviceInfo.getNetworkOperatorName(getContext()));
                 sb.append("\nNetworkClassName="+DeviceInfo.getNetworkClassName(getContext()));
                 sb.append("\nWifiRssiString="+DeviceInfo.getWifiRssiString(getContext()));
                 sb.append("\nWifiRssi="+DeviceInfo.getWifiRssi(getContext()));
                 sb.append("\nisAppProcessByFile="+DeviceInfo.isAppProcessByFile(getContext()));
-                sb.append("\nisAppProcess="+DeviceInfo.isAppProcess(getContext()));
+//                sb.append("\nisAppProcess="+DeviceInfo.isAppProcess(getContext()));
                 sb.append("\nisProxy="+DeviceInfo.isProxy(getContext()));
 
                 printLog(sb.toString());

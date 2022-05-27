@@ -26,6 +26,8 @@ public class MobileApplication extends CoreApplication {
         super.onCreate();
         this.registerRoute();
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+
+        getSession().remove("");
     }
 
     @Override

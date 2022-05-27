@@ -172,7 +172,7 @@ class AnalyticsServiceImpl extends ITrackerHandler implements AnalyticsService {
         StrictMode.ThreadPolicy oldPolicy = StrictMode.allowThreadDiskReads();
         Map<String, String> params = new HashMap<>();
         params.put("osVersion", DeviceInfo.getOSVersion());
-        params.put("deviceId", getDeviceId(mContext));
+//        params.put("deviceId", getDeviceId(mContext));
         params.put("platform", DeviceInfo.getOS());
         params.put("channelId", getChannelID(mContext));
         params.put("appId", getAppID(mContext));
@@ -227,7 +227,7 @@ class AnalyticsServiceImpl extends ITrackerHandler implements AnalyticsService {
         params.put("language", DeviceInfo.getLanguage());
         params.put("charset", DeviceInfo.getCharset());
         params.put("ip", DeviceInfo.getIpStr(mContext));
-        params.put("mac", DeviceInfo.getMacAddress(mContext));
+//        params.put("mac", DeviceInfo.getMacAddress(mContext));
         params.put("cpuABI", DeviceInfo.getCPUABI());
         params.put("cpuInfo", DeviceInfo.getCPUInfo());
         params.put("memSize", ""+DeviceInfo.getMemTotalSize());
@@ -239,9 +239,9 @@ class AnalyticsServiceImpl extends ITrackerHandler implements AnalyticsService {
     public Map<String, String> getDeviceParams() {
         return deviceParams;
     }
-    private String getDeviceId(Context context) {
-        return DeviceInfo.getDeviceId(context);
-    }
+//    private String getDeviceId(Context context) {
+//        return DeviceInfo.getDeviceId(context);
+//    }
 
     private String getChannelID(Context context) {
         String channelId = DeviceInfo.getAppStringMetaData(context, "CHANNEL_ID");

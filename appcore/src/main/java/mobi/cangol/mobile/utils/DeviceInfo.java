@@ -623,44 +623,44 @@ public final class DeviceInfo {
         return data;
     }
 
-    /**
-     * 获取mac地址
-     *
-     * @param context
-     * @return
-     */
-    @SuppressLint("HardwareIds")
-    public static String getMacAddress(Context context) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            try {
-                final List<NetworkInterface> all = Collections.list(NetworkInterface.getNetworkInterfaces());
-                for (final NetworkInterface nif : all) {
-                    if (!nif.getName().equalsIgnoreCase("wlan0")) continue;
-
-                    final byte[] macBytes = nif.getHardwareAddress();
-                    if (macBytes == null) {
-                        return "";
-                    }
-
-                    final StringBuilder res1 = new StringBuilder();
-                    for (final byte b : macBytes) {
-                        res1.append(String.format("%02X:", b));
-                    }
-
-                    if (res1.length() > 0) {
-                        res1.deleteCharAt(res1.length() - 1);
-                    }
-                    return res1.toString();
-                }
-            } catch (Exception e) {
-                Log.e(e.getMessage());
-            }
-            return "02:00:00:00:00:00";
-        } else {
-            final WifiManager manager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-            return manager.getConnectionInfo().getMacAddress();
-        }
-    }
+//    /**
+//     * 获取mac地址
+//     *
+//     * @param context
+//     * @return
+//     */
+//    @SuppressLint("HardwareIds")
+//    public static String getMacAddress(Context context) {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            try {
+//                final List<NetworkInterface> all = Collections.list(NetworkInterface.getNetworkInterfaces());
+//                for (final NetworkInterface nif : all) {
+//                    if (!nif.getName().equalsIgnoreCase("wlan0")) continue;
+//
+//                    final byte[] macBytes = nif.getHardwareAddress();
+//                    if (macBytes == null) {
+//                        return "";
+//                    }
+//
+//                    final StringBuilder res1 = new StringBuilder();
+//                    for (final byte b : macBytes) {
+//                        res1.append(String.format("%02X:", b));
+//                    }
+//
+//                    if (res1.length() > 0) {
+//                        res1.deleteCharAt(res1.length() - 1);
+//                    }
+//                    return res1.toString();
+//                }
+//            } catch (Exception e) {
+//                Log.e(e.getMessage());
+//            }
+//            return "02:00:00:00:00:00";
+//        } else {
+//            final WifiManager manager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+//            return manager.getConnectionInfo().getMacAddress();
+//        }
+//    }
 
     /**
      * 获取IP地址
@@ -710,52 +710,52 @@ public final class DeviceInfo {
         }
     }
 
-    public static String getDeviceId(Context context) {
-        String did = "";
-        final  WifiManager manager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        final WifiInfo wifiInfo = manager.getConnectionInfo();
-        final String macAddress = wifiInfo.getMacAddress();
-        Log.i("macAddress did:" + macAddress);
-        if (null != macAddress && !SPECIAL_MAC.equals(macAddress)) {
-            did = macAddress.replace(".", "").replace(":", "")
-                    .replace("-", "").replace("_", "");
-            Log.i("macAddress did:" + did);
-        } else {
-            final TelephonyManager tm = (TelephonyManager) context.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-            String imei = null;
-            try {
-                imei = tm.getDeviceId();
-            } catch (SecurityException e) {
-                //
-            }
-            // no sim: sdk|any pad
-            if (null != imei && !SPECIAL_IMEI.equals(imei)) {
-                did = imei;
-                Log.i("imei did:" + did);
-            } else {
-                final String deviceId = Secure.getString(context.getApplicationContext().getContentResolver(), Secure.ANDROID_ID);
-                // sdk: android_id
-                if (null != deviceId
-                        && !SPECIAL_ANDROID_ID.equals(deviceId)) {
-                    did = deviceId;
-                    Log.i("ANDROID_ID did:" + did);
-                } else {
-                    final SharedPreferences sp = context.getSharedPreferences(DeviceInfo.class.getSimpleName(), Context.MODE_PRIVATE);
-                    String uid = sp.getString("uid", null);
-                    if (null == uid) {
-                        final SharedPreferences.Editor editor = sp.edit();
-                        uid = UUID.randomUUID().toString().replace("-", "");
-                        editor.putString("uid", uid);
-                        editor.apply();
-                        Log.i("uid did:" + did);
-                    }
-
-                    did = uid;
-                }
-            }
-        }
-        return did;
-    }
+//    public static String getDeviceId(Context context) {
+//        String did = "";
+//        final  WifiManager manager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+//        final WifiInfo wifiInfo = manager.getConnectionInfo();
+//        final String macAddress = wifiInfo.getMacAddress();
+//        Log.i("macAddress did:" + macAddress);
+//        if (null != macAddress && !SPECIAL_MAC.equals(macAddress)) {
+//            did = macAddress.replace(".", "").replace(":", "")
+//                    .replace("-", "").replace("_", "");
+//            Log.i("macAddress did:" + did);
+//        } else {
+//            final TelephonyManager tm = (TelephonyManager) context.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
+//            String imei = null;
+//            try {
+//                imei = tm.getDeviceId();
+//            } catch (SecurityException e) {
+//                //
+//            }
+//            // no sim: sdk|any pad
+//            if (null != imei && !SPECIAL_IMEI.equals(imei)) {
+//                did = imei;
+//                Log.i("imei did:" + did);
+//            } else {
+//                final String deviceId = Secure.getString(context.getApplicationContext().getContentResolver(), Secure.ANDROID_ID);
+//                // sdk: android_id
+//                if (null != deviceId
+//                        && !SPECIAL_ANDROID_ID.equals(deviceId)) {
+//                    did = deviceId;
+//                    Log.i("ANDROID_ID did:" + did);
+//                } else {
+//                    final SharedPreferences sp = context.getSharedPreferences(DeviceInfo.class.getSimpleName(), Context.MODE_PRIVATE);
+//                    String uid = sp.getString("uid", null);
+//                    if (null == uid) {
+//                        final SharedPreferences.Editor editor = sp.edit();
+//                        uid = UUID.randomUUID().toString().replace("-", "");
+//                        editor.putString("uid", uid);
+//                        editor.apply();
+//                        Log.i("uid did:" + did);
+//                    }
+//
+//                    did = uid;
+//                }
+//            }
+//        }
+//        return did;
+//    }
 
     /**
      * 判读WIFI网络是否连接
@@ -862,25 +862,25 @@ public final class DeviceInfo {
         return null;
     }
 
-    /**
-     * return activity is foreground
-     *
-     * @param activityName
-     * @param context
-     * @return
-     */
-    public static boolean isForegroundActivity(String activityName, Context context) {
-        if (context == null || TextUtils.isEmpty(activityName)) {
-            return false;
-        }
-        final ActivityManager am = (ActivityManager) context.getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
-        final List<ActivityManager.RunningTaskInfo> list = am.getRunningTasks(1);
-        if (list != null && !list.isEmpty()) {
-            final ComponentName cpn = list.get(0).topActivity;
-            return activityName.equals(cpn.getClassName());
-        }
-        return false;
-    }
+//    /**
+//     * return activity is foreground
+//     *
+//     * @param activityName
+//     * @param context
+//     * @return
+//     */
+//    public static boolean isForegroundActivity(String activityName, Context context) {
+//        if (context == null || TextUtils.isEmpty(activityName)) {
+//            return false;
+//        }
+//        final ActivityManager am = (ActivityManager) context.getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
+//        final List<ActivityManager.RunningTaskInfo> list = am.getRunningTasks(1);
+//        if (list != null && !list.isEmpty()) {
+//            final ComponentName cpn = list.get(0).topActivity;
+//            return activityName.equals(cpn.getClassName());
+//        }
+//        return false;
+//    }
 
     /**
      * return applcation is foreground
@@ -910,27 +910,27 @@ public final class DeviceInfo {
         return false;
     }
 
-    /**
-     * 获取当前进程name
-     *
-     * @param context
-     * @return
-     */
-    public static String getCurProcessName(Context context) {
-
-        final int pid = android.os.Process.myPid();
-
-        final ActivityManager activityManager = (ActivityManager) context.getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
-
-        for (final ActivityManager.RunningAppProcessInfo appProcess : activityManager
-                .getRunningAppProcesses()) {
-
-            if (appProcess.pid == pid) {
-                return appProcess.processName;
-            }
-        }
-        return null;
-    }
+//    /**
+//     * 获取当前进程name
+//     *
+//     * @param context
+//     * @return
+//     */
+//    public static String getCurProcessName(Context context) {
+//
+//        final int pid = android.os.Process.myPid();
+//
+//        final ActivityManager activityManager = (ActivityManager) context.getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
+//
+//        for (final ActivityManager.RunningAppProcessInfo appProcess : activityManager
+//                .getRunningAppProcesses()) {
+//
+//            if (appProcess.pid == pid) {
+//                return appProcess.processName;
+//            }
+//        }
+//        return null;
+//    }
 
     /**
      * 判断设备 是否使用代理上网
@@ -953,15 +953,15 @@ public final class DeviceInfo {
         return (!TextUtils.isEmpty(proxyAddress)) && (proxyPort != -1);
     }
 
-    /**
-     * 是否是app当前进程
-     *
-     * @param context
-     * @return
-     */
-    public static boolean isAppProcess(Context context) {
-        return context.getApplicationInfo().packageName.equals(getCurProcessName(context));
-    }
+//    /**
+//     * 是否是app当前进程
+//     *
+//     * @param context
+//     * @return
+//     */
+//    public static boolean isAppProcess(Context context) {
+//        return context.getApplicationInfo().packageName.equals(getCurProcessName(context));
+//    }
     /**
      * 是否是app当前进程
      *
