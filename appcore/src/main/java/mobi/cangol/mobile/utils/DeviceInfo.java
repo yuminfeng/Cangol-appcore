@@ -702,61 +702,6 @@ public final class DeviceInfo {
         return System.getProperty("file.encoding");
     }
 
-    public static String getSerialNumber() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            return Build.getSerial();
-        }else{
-            return  android.os.Build.SERIAL;
-        }
-    }
-
-//    public static String getDeviceId(Context context) {
-//        String did = "";
-//        final  WifiManager manager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-//        final WifiInfo wifiInfo = manager.getConnectionInfo();
-//        final String macAddress = wifiInfo.getMacAddress();
-//        Log.i("macAddress did:" + macAddress);
-//        if (null != macAddress && !SPECIAL_MAC.equals(macAddress)) {
-//            did = macAddress.replace(".", "").replace(":", "")
-//                    .replace("-", "").replace("_", "");
-//            Log.i("macAddress did:" + did);
-//        } else {
-//            final TelephonyManager tm = (TelephonyManager) context.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-//            String imei = null;
-//            try {
-//                imei = tm.getDeviceId();
-//            } catch (SecurityException e) {
-//                //
-//            }
-//            // no sim: sdk|any pad
-//            if (null != imei && !SPECIAL_IMEI.equals(imei)) {
-//                did = imei;
-//                Log.i("imei did:" + did);
-//            } else {
-//                final String deviceId = Secure.getString(context.getApplicationContext().getContentResolver(), Secure.ANDROID_ID);
-//                // sdk: android_id
-//                if (null != deviceId
-//                        && !SPECIAL_ANDROID_ID.equals(deviceId)) {
-//                    did = deviceId;
-//                    Log.i("ANDROID_ID did:" + did);
-//                } else {
-//                    final SharedPreferences sp = context.getSharedPreferences(DeviceInfo.class.getSimpleName(), Context.MODE_PRIVATE);
-//                    String uid = sp.getString("uid", null);
-//                    if (null == uid) {
-//                        final SharedPreferences.Editor editor = sp.edit();
-//                        uid = UUID.randomUUID().toString().replace("-", "");
-//                        editor.putString("uid", uid);
-//                        editor.apply();
-//                        Log.i("uid did:" + did);
-//                    }
-//
-//                    did = uid;
-//                }
-//            }
-//        }
-//        return did;
-//    }
-
     /**
      * 判读WIFI网络是否连接
      *
