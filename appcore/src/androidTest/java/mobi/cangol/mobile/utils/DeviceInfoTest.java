@@ -143,10 +143,6 @@ public class DeviceInfoTest extends AndroidTestCase {
         assertNotNull(DeviceInfo.getCharset());
     }
 
-    public void testGetDeviceId() {
-        assertNotNull(DeviceInfo.getDeviceId(getContext()));
-    }
-
     public void testGetNetworkType() {
         assertNotNull(DeviceInfo.getNetworkType(getContext()));
     }

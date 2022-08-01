@@ -18,9 +18,7 @@ package mobi.cangol.mobile.utils;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.KeyguardManager;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -32,7 +30,6 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
-import android.provider.Settings.Secure;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -48,17 +45,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.net.NetworkInterface;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-import java.util.UUID;
 
 import mobi.cangol.mobile.logging.Log;
 
@@ -225,7 +219,7 @@ public final class DeviceInfo {
     public static String getCPUInfo() {
         String result = "";
         try {
-            final  Process process = new ProcessBuilder("/system/bin/cat", "/proc/cpuinfo").start();
+            final Process process = new ProcessBuilder("/system/bin/cat", "/proc/cpuinfo").start();
             final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream(), CHARSET));
             final String str = bufferedReader.readLine();
             final String title = "Processor\t: ";
@@ -255,7 +249,7 @@ public final class DeviceInfo {
      */
     public static String getResolution(Context context) {
         final DisplayMetrics dm = new DisplayMetrics();
-        final  WindowManager wm = (WindowManager) context.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        final WindowManager wm = (WindowManager) context.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             wm.getDefaultDisplay().getRealMetrics(dm);
         } else {
@@ -379,6 +373,7 @@ public final class DeviceInfo {
         }
         return provider;
     }
+
     public static String getNetworkOperator(Context context) {
         String provider = "";
         try {
@@ -390,6 +385,7 @@ public final class DeviceInfo {
         }
         return provider;
     }
+
     public static final int NETWORK_TYPE_UNAVAILABLE = -1;
     public static final int NETWORK_TYPE_WIFI = -101;
 
@@ -415,19 +411,21 @@ public final class DeviceInfo {
 
         return networkType;
     }
+
     public static final int NETWORK_CLASS_WIFI = -101;
     public static final int NETWORK_CLASS_UNAVAILABLE = -1;
     public static final int NETWORK_CLASS_2G = 1;
     public static final int NETWORK_CLASS_3G = 2;
     public static final int NETWORK_CLASS_4G = 3;
-    public static final int NETWORK_CLASS_UNKNOWN=0;
+    public static final int NETWORK_CLASS_UNKNOWN = 0;
+
     public static int getNetworkClass(Context context) {
-        int networkType= getNetworkType(context);
+        int networkType = getNetworkType(context);
         if (networkType == NETWORK_TYPE_WIFI) {
             return NETWORK_CLASS_WIFI;
         } else if (networkType == NETWORK_TYPE_UNAVAILABLE) {
             return NETWORK_CLASS_UNAVAILABLE;
-        }else{
+        } else {
             switch (networkType) {
                 case TelephonyManager.NETWORK_TYPE_GPRS:
                 case TelephonyManager.NETWORK_TYPE_EDGE:
@@ -452,13 +450,14 @@ public final class DeviceInfo {
             }
         }
     }
+
     public static String getNetworkClassName(Context context) {
-        int networkType= getNetworkType(context);
+        int networkType = getNetworkType(context);
         if (networkType == NETWORK_TYPE_WIFI) {
             return "WIFI";
         } else if (networkType == NETWORK_TYPE_UNAVAILABLE) {
             return "UNAVAILABLE";
-        }else{
+        } else {
             switch (networkType) {
                 case TelephonyManager.NETWORK_TYPE_GPRS:
                 case TelephonyManager.NETWORK_TYPE_EDGE:
@@ -744,7 +743,7 @@ public final class DeviceInfo {
      * @return
      */
     public static boolean isNetworkLocation(Context context) {
-        final  LocationManager locationManager = (LocationManager) context.getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+        final LocationManager locationManager = (LocationManager) context.getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
         return locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }
 
@@ -782,7 +781,7 @@ public final class DeviceInfo {
 
             final InputStream input = new ByteArrayInputStream(cert);
             //证书工厂类，这个类实现了出厂合格证算法的功能
-            final  CertificateFactory cf = CertificateFactory.getInstance("X509");
+            final CertificateFactory cf = CertificateFactory.getInstance("X509");
             final X509Certificate c = (X509Certificate) cf.generateCertificate(input);
             //获得公钥
             final byte[] publicKey = md.digest(c.getEncoded());
@@ -907,6 +906,7 @@ public final class DeviceInfo {
 //    public static boolean isAppProcess(Context context) {
 //        return context.getApplicationInfo().packageName.equals(getCurProcessName(context));
 //    }
+
     /**
      * 是否是app当前进程
      *
@@ -929,6 +929,7 @@ public final class DeviceInfo {
             return "这里写你的App的进程名"; //TODO 有可能获取失败，需要写默认的进程名
         }
     }
+
     /**
      * 检测是否具有底部导航栏
      *
@@ -936,8 +937,8 @@ public final class DeviceInfo {
      */
     public static boolean checkDeviceHasNavigationBar(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-           final WindowManager windowManager = (WindowManager) context.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
-           final Display display = windowManager.getDefaultDisplay();
+            final WindowManager windowManager = (WindowManager) context.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+            final Display display = windowManager.getDefaultDisplay();
             final DisplayMetrics realDisplayMetrics = new DisplayMetrics();
             display.getRealMetrics(realDisplayMetrics);
             final int realHeight = realDisplayMetrics.heightPixels;

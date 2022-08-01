@@ -59,12 +59,10 @@ public class UtilsFragment extends Fragment {
                 sb.append("\nAppVersion="+DeviceInfo.getAppVersion(getContext()));
                 sb.append("\nSHA1Fingerprint="+DeviceInfo.getSHA1Fingerprint(getContext()));
                 sb.append("\nMD5Fingerprint="+DeviceInfo.getMD5Fingerprint(getContext()));
-//                sb.append("\nDeviceId="+DeviceInfo.getDeviceId(getContext()));
                 sb.append("\ngetMobileInfo="+DeviceInfo.getMobileInfo()+"\n---------|\n");
                 sb.append("\nMemTotalSize="+DeviceInfo.getMemTotalSize());
                 sb.append("\nMemFreeSize="+DeviceInfo.getMemFreeSize());
                 sb.append("\nMemUsedPer="+(100f*(DeviceInfo.getMemTotalSize()-DeviceInfo.getMemFreeSize())/DeviceInfo.getMemTotalSize()*1.0f)+"%");
-
                 sb.append("\nMemInfo="+DeviceInfo.getMemInfo()+"\n---------|\n");
                 sb.append("\nCPUABI="+DeviceInfo.getCPUABI());
                 sb.append("\nCPUInfo="+DeviceInfo.getCPUInfo()+"\n---------|\n");
