@@ -12,3 +12,4 @@
 -
 - update DeviceInfo.getSerialNumber() [Android Q 已限制访问 IMEI 和序列号,它仅适用于具有特殊运营商许可的平台和应用程序]
 - update DeviceInfo.getDeviceId() [同上]
+- update DeviceInfo.getMacAddress() 

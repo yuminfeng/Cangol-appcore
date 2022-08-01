@@ -622,45 +622,6 @@ public final class DeviceInfo {
         return data;
     }
 
-//    /**
-//     * 获取mac地址
-//     *
-//     * @param context
-//     * @return
-//     */
-//    @SuppressLint("HardwareIds")
-//    public static String getMacAddress(Context context) {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            try {
-//                final List<NetworkInterface> all = Collections.list(NetworkInterface.getNetworkInterfaces());
-//                for (final NetworkInterface nif : all) {
-//                    if (!nif.getName().equalsIgnoreCase("wlan0")) continue;
-//
-//                    final byte[] macBytes = nif.getHardwareAddress();
-//                    if (macBytes == null) {
-//                        return "";
-//                    }
-//
-//                    final StringBuilder res1 = new StringBuilder();
-//                    for (final byte b : macBytes) {
-//                        res1.append(String.format("%02X:", b));
-//                    }
-//
-//                    if (res1.length() > 0) {
-//                        res1.deleteCharAt(res1.length() - 1);
-//                    }
-//                    return res1.toString();
-//                }
-//            } catch (Exception e) {
-//                Log.e(e.getMessage());
-//            }
-//            return "02:00:00:00:00:00";
-//        } else {
-//            final WifiManager manager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-//            return manager.getConnectionInfo().getMacAddress();
-//        }
-//    }
-
     /**
      * 获取IP地址
      *

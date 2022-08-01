@@ -127,10 +127,6 @@ public class DeviceInfoTest extends AndroidTestCase {
         DeviceInfo.getAppStringMetaData(getContext(),"test");
     }
 
-    public void testGetMacAddress() {
-        DeviceInfo.getMacAddress(getContext());
-    }
-
     public void testGetIpAddress() {
         assertNotNull(DeviceInfo.getIpAddress(getContext()));
     }
