@@ -73,7 +73,6 @@ public class AppServiceManagerImpl extends AppServiceManager {
         classList.add(ClassUtils.loadClass(mContext, "mobi.cangol.mobile.service.conf.ConfigServiceImpl"));
         classList.add(ClassUtils.loadClass(mContext, "mobi.cangol.mobile.service.crash.CrashServiceImpl"));
         classList.add(ClassUtils.loadClass(mContext, "mobi.cangol.mobile.service.download.DownloadManagerImpl"));
-        classList.add(ClassUtils.loadClass(mContext, "mobi.cangol.mobile.service.location.LocationServiceImpl"));
         classList.add(ClassUtils.loadClass(mContext, "mobi.cangol.mobile.service.session.SessionServiceImpl"));
         classList.add(ClassUtils.loadClass(mContext, "mobi.cangol.mobile.service.status.StatusServiceImpl"));
         classList.add(ClassUtils.loadClass(mContext, "mobi.cangol.mobile.service.upgrade.UpgradeServiceImpl"));

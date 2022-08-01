@@ -39,7 +39,6 @@ Gradle
 * 	[ConfigService](http://cangol.github.io/Cangol-appcore/mobi/cangol/mobile/service/conf/ConfigService.html)  应用配置服务
 * 	[DownloadManager](http://cangol.github.io/Cangol-appcore/mobi/cangol/mobile/service/download/DownloadManager.html)  下载服务
 * 	[SessionService](http://cangol.github.io/Cangol-appcore/mobi/cangol/mobile/service/session/SessionService.html) 全局变量服务
-* 	[LocationService](http://cangol.github.io/Cangol-appcore/mobi/cangol/mobile/service/location/LocationService.html) 位置服务
 * 	[StatusService](http://cangol.github.io/Cangol-appcore/mobi/cangol/mobile/service/status/StatusService.html) 状态监听服务
 * 	[UpgradeService](http://cangol.github.io/Cangol-appcore/mobi/cangol/mobile/service/upgrade/UpgradeService.html) 更新服务
 

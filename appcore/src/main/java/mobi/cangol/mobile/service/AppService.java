@@ -27,10 +27,6 @@ public interface AppService {
      */
     String UPGRADE_SERVICE = "UpgradeService";
     /**
-     * 位置服务
-     */
-    String LOCATION_SERVICE = "LocationService";
-    /**
      * 缓存服务
      */
     String CACHE_MANAGER = "CacheManager";

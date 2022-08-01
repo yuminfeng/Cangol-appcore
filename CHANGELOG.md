@@ -6,3 +6,4 @@
 ## 1.2.9  
 - remove libdemo
 - remove AnalyticsService
+- remove LocationService

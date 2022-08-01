@@ -19,7 +19,6 @@ import mobi.cangol.mobile.appcore.demo.fragment.appservice.CacheManagerFragment;
 import mobi.cangol.mobile.appcore.demo.fragment.appservice.ConfigServiceFragment;
 import mobi.cangol.mobile.appcore.demo.fragment.appservice.CrashServiceFragment;
 import mobi.cangol.mobile.appcore.demo.fragment.appservice.DownloadManagerFragment;
-import mobi.cangol.mobile.appcore.demo.fragment.appservice.LocationServiceFragment;
 import mobi.cangol.mobile.appcore.demo.fragment.appservice.OberserverManagerFragment;
 import mobi.cangol.mobile.appcore.demo.fragment.appservice.RouteServiceFragment;
 import mobi.cangol.mobile.appcore.demo.fragment.appservice.SessionServiceFragment;
@@ -39,7 +38,6 @@ public class AppServiceFragment extends ListFragment {
         list.add(CacheManagerFragment.class);
         list.add(ConfigServiceFragment.class);
         list.add(CrashServiceFragment.class);
-        list.add(LocationServiceFragment.class);
         list.add(SessionServiceFragment.class);
         list.add(StatusServiceFragment.class);
         list.add(UpgradeServiceFragment.class);
