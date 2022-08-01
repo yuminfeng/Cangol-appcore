@@ -3,18 +3,18 @@ package mobi.cangol.mobile.appcore.demo.fragment;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.ListFragment;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.ListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import mobi.cangol.mobile.appcore.demo.activity.DynamicActivity;
 import mobi.cangol.mobile.appcore.demo.activity.MainActivity;
-import mobi.cangol.mobile.appcore.demo.fragment.appservice.AnalyticsServiceFragment;
 import mobi.cangol.mobile.appcore.demo.fragment.appservice.CacheManagerFragment;
 import mobi.cangol.mobile.appcore.demo.fragment.appservice.ConfigServiceFragment;
 import mobi.cangol.mobile.appcore.demo.fragment.appservice.CrashServiceFragment;
@@ -33,9 +33,9 @@ import mobi.cangol.mobile.stat.StatAgent;
 public class AppServiceFragment extends ListFragment {
     private static final String TAG = "AppServiceFragment";
     private List<Class<? extends Fragment>> list;
-    public AppServiceFragment(){
-        this.list=new ArrayList<Class<? extends Fragment>>();
-        list.add(AnalyticsServiceFragment.class);
+
+    public AppServiceFragment() {
+        this.list = new ArrayList<Class<? extends Fragment>>();
         list.add(CacheManagerFragment.class);
         list.add(ConfigServiceFragment.class);
         list.add(CrashServiceFragment.class);
@@ -47,32 +47,35 @@ public class AppServiceFragment extends ListFragment {
         list.add(OberserverManagerFragment.class);
         list.add(RouteServiceFragment.class);
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        List<String> listStr=new ArrayList<String>();
+        List<String> listStr = new ArrayList<String>();
         for (int i = 0; i < list.size(); i++) {
-            listStr.add(list.get(i).getSimpleName().replace("Fragment",""));
+            listStr.add(list.get(i).getSimpleName().replace("Fragment", ""));
         }
-        setListAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, listStr));
+        setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, listStr));
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        getActivity().setTitle((String)getListAdapter().getItem(position));
-        if(getActivity() instanceof MainActivity){
-            ((MainActivity)getActivity()).toFragment(list.get(position),new Bundle(),false);
-        }else{
-            ((DynamicActivity)getActivity()).toFragment(list.get(position),new Bundle(),false);
+        getActivity().setTitle((String) getListAdapter().getItem(position));
+        if (getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).toFragment(list.get(position), new Bundle(), false);
+        } else {
+            ((DynamicActivity) getActivity()).toFragment(list.get(position), new Bundle(), false);
         }
         getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void onStart() {
@@ -80,6 +83,7 @@ public class AppServiceFragment extends ListFragment {
         getActivity().setTitle("AppService");
         getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
     @Override
     public void onPause() {
         super.onPause();

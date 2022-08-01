@@ -27,10 +27,6 @@
         <property name="thread_max">2</property>
         <property name="threadpool_name">Download</property>
     </service>
-    <service name="AnalyticsService">
-        <property name="thread_max">2</property>
-        <property name="threadpool_name">AnalyticsService</property>
-    </service>
     <service name="LocationService">
         <property name="timeout">300000</property>
         <property name="better_time">120000</property>

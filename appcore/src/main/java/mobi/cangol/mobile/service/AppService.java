@@ -27,10 +27,6 @@ public interface AppService {
      */
     String UPGRADE_SERVICE = "UpgradeService";
     /**
-     * 统计服务
-     */
-    String ANALYTICS_SERVICE = "AnalyticsService";
-    /**
      * 位置服务
      */
     String LOCATION_SERVICE = "LocationService";

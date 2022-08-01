@@ -25,9 +25,6 @@ import java.util.Map;
 import mobi.cangol.mobile.CoreApplication;
 import mobi.cangol.mobile.logging.Log;
 import mobi.cangol.mobile.service.AppService;
-import mobi.cangol.mobile.service.analytics.AnalyticsService;
-import mobi.cangol.mobile.service.analytics.IMapBuilder;
-import mobi.cangol.mobile.service.analytics.ITracker;
 import mobi.cangol.mobile.service.crash.CrashService;
 import mobi.cangol.mobile.service.session.Session;
 import mobi.cangol.mobile.service.session.SessionService;
@@ -48,8 +45,6 @@ public class StatAgent {
     private static final  String TIMESTAMP = "timestamp";
     private static StatAgent instance;
     private CoreApplication context;
-    private ITracker itracker;
-    private AnalyticsService analyticsService;
     private Session session;
     private CrashService crashService;
     private String statServerURL=null;
@@ -57,9 +52,7 @@ public class StatAgent {
     protected StatAgent(CoreApplication coreApplication) {
         this.context = coreApplication;
         session = ((SessionService) coreApplication.getAppService(AppService.SESSION_SERVICE)).getSession();
-        analyticsService = (AnalyticsService) coreApplication.getAppService(AppService.ANALYTICS_SERVICE);
         crashService = (CrashService) coreApplication.getAppService(AppService.CRASH_SERVICE);
-        itracker = analyticsService.getTracker(STAT_TRACKING_ID);
     }
     public static StatAgent getInstance() {
         if (instance == null) {
@@ -97,39 +90,36 @@ public class StatAgent {
     }
 
     public void destroy() {
-        analyticsService.closeTracker(STAT_TRACKING_ID);
         StatsSession.getInstance().onDestroy();
         StatsTraffic.getInstance(context).onDestroy();
     }
 
     public void setDebug(boolean debug) {
-        analyticsService.setDebug(debug);
     }
 
     public void send(Builder eventBuilder) {
-        final IMapBuilder builder = IMapBuilder.build();
-        builder.setAll(eventBuilder.build());
-        switch (eventBuilder.type) {
-            case EVENT:
-                builder.setUrl(getStatHostUrl() + STAT_ACTION_EVENT);
-                break;
-            case TIMING:
-                builder.setUrl(getStatHostUrl() + STAT_ACTION_TIMING);
-                break;
-            case EXCEPTION:
-                builder.setUrl(getStatHostUrl() + STAT_ACTION_EXCEPTION);
-                break;
-            case LAUNCHER:
-                builder.setUrl(getStatHostUrl() + STAT_ACTION_LAUNCH);
-                break;
-            case SESSION:
-                builder.setUrl(getStatHostUrl() + STAT_ACTION_SESSION);
-                break;
-            case TRAFFIC:
-                builder.setUrl(getStatHostUrl() + STAT_ACTION_TRAFFIC);
-                break;
-        }
-        itracker.send(builder);
+//        final IMapBuilder builder = IMapBuilder.build();
+//        builder.setAll(eventBuilder.build());
+//        switch (eventBuilder.type) {
+//            case EVENT:
+//                builder.setUrl(getStatHostUrl() + STAT_ACTION_EVENT);
+//                break;
+//            case TIMING:
+//                builder.setUrl(getStatHostUrl() + STAT_ACTION_TIMING);
+//                break;
+//            case EXCEPTION:
+//                builder.setUrl(getStatHostUrl() + STAT_ACTION_EXCEPTION);
+//                break;
+//            case LAUNCHER:
+//                builder.setUrl(getStatHostUrl() + STAT_ACTION_LAUNCH);
+//                break;
+//            case SESSION:
+//                builder.setUrl(getStatHostUrl() + STAT_ACTION_SESSION);
+//                break;
+//            case TRAFFIC:
+//                builder.setUrl(getStatHostUrl() + STAT_ACTION_TRAFFIC);
+//                break;
+//        }
     }
 
     public void sendLaunch() {

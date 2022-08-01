@@ -34,7 +34,6 @@ Gradle
 ## AppService
 应用服务:实现方式为依赖注入，这是整个框架的核心内容
 
-*   [AnalyticsService](http://cangol.github.io/Cangol-appcore/mobi/cangol/mobile/service/analytics/AnalyticsService.html) 统计服务
 * 	[CacheManager](http://cangol.github.io/Cangol-appcore/mobi/cangol/mobile/service/cache/CacheManager.html) 缓存服务
 * 	[CrashService](http://cangol.github.io/Cangol-appcore/mobi/cangol/mobile/service/crash/CrashService.html)  异常处理服务
 * 	[ConfigService](http://cangol.github.io/Cangol-appcore/mobi/cangol/mobile/service/conf/ConfigService.html)  应用配置服务
