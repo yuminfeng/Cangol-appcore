@@ -61,19 +61,7 @@ import mobi.cangol.mobile.logging.Log;
  */
 @SuppressLint("MissingPermission")
 public final class DeviceInfo {
-    /**
-     * 默认IMEI
-     */
-    private static final String SPECIAL_IMEI = "000000000000000";
-    /**
-     * 默认ANDROID_ID
-     */
-    private static final String SPECIAL_ANDROID_ID = "9774d56d682e549c";
 
-    /**
-     * 默认MAC(小米)
-     */
-    private static final String SPECIAL_MAC = "02:00:00:00:00:00";
     /**
      * 默认CHARSET
      */
