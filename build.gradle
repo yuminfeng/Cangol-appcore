@@ -6,16 +6,13 @@ buildscript {
     ext.build_version = '30.0.3'
 
     repositories {
-        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         google()
         mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.2.2'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5'
-        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.3'
-//        classpath "net.saliman:gradle-cobertura-plugin:3.0.0"
         classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
         classpath 'mobi.cangol.mobile:fir-gradle-plugin:2.1.0'
     }
@@ -23,7 +20,7 @@ buildscript {
 allprojects {
 
     repositories {
-        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         google()
         mavenCentral()
     }

@@ -1,9 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
-apply plugin: 'com.github.kt3k.coveralls'
-//apply plugin: 'net.saliman.cobertura'
-apply from: '../maven_push.gradle'
 apply from: '../config/quality.gradle'
 
 dependencies {
@@ -67,7 +63,7 @@ android.libraryVariants.all { variant ->
     task.from variant.javaCompile.destinationDir
     task.exclude '**/BuildConfig.class'
     task.exclude '**/R.class'
-    task.manifest{
+    task.manifest {
         attributes(
                 "Implementation-Title": project.name,
                 "Implementation-Version": version
@@ -87,8 +83,6 @@ task sourcesJar(type: Jar) {
 task javadoc(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
     classpath = configurations.compile
-    //classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    //classpath += project.files(configurations.compile.files,android.getBootClasspath().join(File.pathSeparator))
     options {
         encoding "UTF-8"
         links "http://docs.oracle.com/javase/7/docs/api/"
@@ -109,12 +103,6 @@ artifacts {
     archives javadocJar
 }
 
-tasks.coveralls {
-    dependsOn 'check'
-}
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
-}
-coveralls {
-    jacocoReportPath = "${buildDir}/reports/coverage/debug/report.xml"
 }
