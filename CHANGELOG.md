@@ -17,3 +17,7 @@
 ## 1.3.0
 
 - upgrade sdk_version = 31
+- remove kt3k.gradle.plugin
+- remove hugo plugin
+- remove fir plugin
+- remove jfrog.bintray
