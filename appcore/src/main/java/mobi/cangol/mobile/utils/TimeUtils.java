@@ -147,7 +147,7 @@ public class TimeUtils {
      * @return String
      */
     public static String getCurrentTimeAddYear(int addYear) {
-        return String.valueOf(Integer.parseInt(getCurrentYear()) + addYear) + new SimpleDateFormat("-MM-dd:HH:mm:ss").format(new Date());
+        return Integer.parseInt(getCurrentYear()) + addYear + new SimpleDateFormat("-MM-dd:HH:mm:ss").format(new Date());
     }
 
     /**
