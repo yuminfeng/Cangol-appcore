@@ -1,20 +1,14 @@
 package mobi.cangol.mobile.appcore.demo;
 
-
-
 import androidx.appcompat.app.AppCompatDelegate;
 
-import hugo.weaving.DebugLog;
 import mobi.cangol.mobile.CoreApplication;
-import mobi.cangol.mobile.service.AppService;
-import mobi.cangol.mobile.service.route.RouteService;
 import mobi.cangol.mobile.stat.StatAgent;
 import mobi.cangol.mobile.utils.DeviceInfo;
 
 /**
  * Created by weixuewu on 15/9/14.
  */
-@DebugLog
 public class MobileApplication extends CoreApplication {
 
     public void onCreate() {
