@@ -21,3 +21,4 @@
 - remove hugo plugin
 - remove fir plugin
 - remove jfrog.bintray
+- upgrade gradle 7.1.2
