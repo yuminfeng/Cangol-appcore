@@ -40,9 +40,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigation {
         if (savedInstanceState == null) {
             toFragment(MainFragment.class,null,false);
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            this.setActionBar(new Toolbar(this));
-        }
+        this.setActionBar(new Toolbar(this));
         Log.d("getMD5Fingerprint="+DeviceInfo.getMD5Fingerprint(this));
         Log.d("getSHA1Fingerprint="+DeviceInfo.getSHA1Fingerprint(this));
         mRouteService= (RouteService) ((CoreApplication)getApplication()).getAppService(AppService.ROUTE_SERVICE);

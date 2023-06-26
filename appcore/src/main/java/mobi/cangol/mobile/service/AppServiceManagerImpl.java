@@ -58,16 +58,8 @@ public class AppServiceManagerImpl extends AppServiceManager {
     }
 
     private void initClass() {
-        List<Class<? extends AppService>> classList = null;
+        List<Class<? extends AppService>> classList;
         Log.d(TAG, "SDK_INT=" + Build.VERSION.SDK_INT);
-        /** mulit dex not used
-         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-         Log.d(TAG,"Class Scan");
-         classList=ClassUtils.getAllClassByInterface(AppService.class, mContext, this.getClass().getPackage().getName());
-         classList.addAll(ClassUtils.getAllClassByInterface(AppService.class, mContext, mContext.getPackageName()));
-         //2.2-2.3 版本 Process terminated by signal (11) 堆栈溢出
-         }else**/
-
         classList = new ArrayList<>();
         classList.add(ClassUtils.loadClass(mContext, "mobi.cangol.mobile.service.cache.CacheManagerImpl"));
         classList.add(ClassUtils.loadClass(mContext, "mobi.cangol.mobile.service.conf.ConfigServiceImpl"));
@@ -150,7 +142,7 @@ public class AppServiceManagerImpl extends AppServiceManager {
      */
     @Deprecated
     private void init(AppService appService, ServiceProperty serviceProperty) {
-        Field filed = null;
+        Field filed;
         try {
             filed = appService.getClass().getDeclaredField("mServiceProperty");
             if (filed == null) {
@@ -175,7 +167,7 @@ public class AppServiceManagerImpl extends AppServiceManager {
 
     @Override
     public void destroyService(String name) {
-        AppService appService = null;
+        AppService appService;
         if (mRunServiceMap.containsKey(name)) {
             appService = mRunServiceMap.get(name);
             appService.onDestroy();
@@ -188,7 +180,7 @@ public class AppServiceManagerImpl extends AppServiceManager {
     @Override
     public void destroyAllService() {
         Log.d(TAG, "destroyAllService");
-        for (Map.Entry<String,AppService> entry: mRunServiceMap.entrySet()) {
+        for (Map.Entry<String, AppService> entry : mRunServiceMap.entrySet()) {
             entry.getValue().onDestroy();
         }
         mRunServiceMap.clear();
@@ -226,20 +218,14 @@ public class AppServiceManagerImpl extends AppServiceManager {
     }
 
     /**
-     *  @deprecated
+     * @deprecated
      */
     @Deprecated
     public void initServiceProperties() {
-        if (Build.VERSION.SDK_INT >= 14) {
-            // Temporarily disable logging of disk reads on the Looper thread
-            final  StrictMode.ThreadPolicy oldPolicy = StrictMode.allowThreadDiskReads();
-            final InputStream is = this.getClass().getResourceAsStream("properties.xml");
-            initSource(is);
-            StrictMode.setThreadPolicy(oldPolicy);
-        } else {
-            final  InputStream is = this.getClass().getResourceAsStream("properties.xml");
-            initSource(is);
-        }
+        final StrictMode.ThreadPolicy oldPolicy = StrictMode.allowThreadDiskReads();
+        final InputStream is = this.getClass().getResourceAsStream("properties.xml");
+        initSource(is);
+        StrictMode.setThreadPolicy(oldPolicy);
     }
 
     @Override
@@ -254,21 +240,21 @@ public class AppServiceManagerImpl extends AppServiceManager {
 
     private void parser(InputStream is) throws ParserConfigurationException, IOException, SAXException {
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        final  DocumentBuilder builder = factory.newDocumentBuilder();
+        final DocumentBuilder builder = factory.newDocumentBuilder();
         final Document document = builder.parse(is);
         final Element root = document.getDocumentElement();
-        final  NodeList nodeList = root.getChildNodes();
+        final NodeList nodeList = root.getChildNodes();
         for (int i = 0; i < nodeList.getLength(); i++) {
             final Node node = nodeList.item(i);
             if (node instanceof Element) {
                 final Element element = (Element) node;
                 final String name = element.getAttribute("name");
-                final  NodeList nodeList2 = element.getChildNodes();
+                final NodeList nodeList2 = element.getChildNodes();
                 final ServiceProperty properties = new ServiceProperty(name);
                 for (int j = 0; j < nodeList2.getLength(); j++) {
                     final Node node2 = nodeList2.item(j);
                     if (node2 instanceof Element) {
-                        final  Element element2 = (Element) node2;
+                        final Element element2 = (Element) node2;
                         properties.putString(element2.getAttribute("name"), element2.getTextContent());
                     }
                 }

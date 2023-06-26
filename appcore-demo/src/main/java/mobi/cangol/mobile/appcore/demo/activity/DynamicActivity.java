@@ -28,10 +28,8 @@ public class DynamicActivity extends AppCompatActivity {
         mRouteService= (RouteService) ((CoreApplication)getApplication()).getAppService(AppService.ROUTE_SERVICE);
         handleIntent(getIntent());
         ((CoreApplication)getApplication()).addActivityToManager(this);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            this.setActionBar(new Toolbar(this));
-            this.getActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+        this.setActionBar(new Toolbar(this));
+        this.getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
