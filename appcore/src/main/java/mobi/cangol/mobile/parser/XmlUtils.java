@@ -15,8 +15,6 @@
  */
 package mobi.cangol.mobile.parser;
 
-import android.os.Build;
-import androidx.annotation.RequiresApi;
 import android.util.Log;
 import android.util.Xml;
 

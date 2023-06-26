@@ -15,9 +15,7 @@
  */
 package mobi.cangol.mobile.service.crash;
 
-import android.annotation.TargetApi;
 import android.app.Application;
-import android.os.Build;
 import android.os.StrictMode;
 import android.text.TextUtils;
 

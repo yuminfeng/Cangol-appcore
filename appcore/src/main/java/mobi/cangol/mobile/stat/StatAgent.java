@@ -15,9 +15,6 @@
  */
 package mobi.cangol.mobile.stat;
 
-import android.annotation.TargetApi;
-import android.os.Build;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

@@ -1,9 +1,7 @@
 package mobi.cangol.mobile.service.session;
 
-import android.annotation.TargetApi;
 import android.app.Application;
 import android.content.Context;
-import android.os.Build;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -19,7 +17,6 @@ import mobi.cangol.mobile.service.AppService;
 import mobi.cangol.mobile.service.Service;
 import mobi.cangol.mobile.service.ServiceProperty;
 import mobi.cangol.mobile.service.conf.ConfigService;
-import mobi.cangol.mobile.utils.FileUtils;
 
 /**
  * Created by weixuewu on 15/10/24.

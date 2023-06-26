@@ -16,8 +16,6 @@
 package mobi.cangol.mobile.service.cache;
 
 import android.app.Application;
-
-import androidx.annotation.RequiresApi;
 import android.text.TextUtils;
 
 import java.io.BufferedInputStream;

@@ -6,12 +6,7 @@ import android.os.Parcelable;
 import android.util.SparseArray;
 
 import java.io.Serializable;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import mobi.cangol.mobile.utils.UrlUtils;
 
 /**
  * Created by xuewu.wei on 2018/10/16.

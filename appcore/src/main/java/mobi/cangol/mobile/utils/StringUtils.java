@@ -19,9 +19,6 @@ package mobi.cangol.mobile.utils;
  * @author Cangol
  */
 
-import android.os.Build;
-import androidx.annotation.RequiresApi;
-
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 

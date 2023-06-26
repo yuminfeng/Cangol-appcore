@@ -15,9 +15,7 @@
  */
 package mobi.cangol.mobile.service.conf;
 
-import android.annotation.TargetApi;
 import android.app.Application;
-import android.os.Build;
 import android.os.Environment;
 import android.os.StrictMode;
 
