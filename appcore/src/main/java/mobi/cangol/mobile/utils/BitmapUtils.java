@@ -60,7 +60,6 @@ public final class BitmapUtils {
      * @param v
      * @return
      */
-    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     public static Bitmap viewScreenshot(View v) {
         Bitmap bitmap = Bitmap.createBitmap(v.getMeasuredWidth(), v.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
         Canvas c = new Canvas(bitmap);

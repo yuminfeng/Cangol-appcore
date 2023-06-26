@@ -70,18 +70,14 @@ public class MainFragment extends ListFragment {
         super.onListItemClick(l, v, position, id);
         getActivity().setTitle((String)getListAdapter().getItem(position));
         ((MainActivity)getActivity()).toFragment(fragments.get(position),new Bundle(),false);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+        getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
     }
     @Override
     public void onStart() {
         super.onStart();
         if(this.getFragmentManager().getBackStackEntryCount()==0){
             getActivity().setTitle(R.string.app_name);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                getActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
-            }
+            getActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
         }
     }
     @Override

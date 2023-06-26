@@ -93,7 +93,6 @@ public class DatabaseFragment extends Fragment {
         listView.setAdapter(simpleAdapter);
 
     }
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private void loadData() {
         simpleAdapter.clear();
         List<Data> list=dataService.findListByName("1");

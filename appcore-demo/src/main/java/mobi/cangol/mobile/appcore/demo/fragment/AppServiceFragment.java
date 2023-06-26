@@ -61,7 +61,6 @@ public class AppServiceFragment extends ListFragment {
         setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, listStr));
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
@@ -74,7 +73,6 @@ public class AppServiceFragment extends ListFragment {
         getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void onStart() {
         super.onStart();

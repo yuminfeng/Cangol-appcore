@@ -156,7 +156,6 @@ public class Session {
         mMap.put(key, value);
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public void saveStringSet(String key, Set<String> value) {
         getShared().edit().putStringSet(key, value).apply();
         mMap.put(key, value);

@@ -134,7 +134,6 @@ class ConfigServiceImpl implements ConfigService {
         mAppDir = initAppDir();
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private File initAppDir() {
         final StrictMode.ThreadPolicy oldPolicy = StrictMode.allowThreadDiskWrites();
         File file = null;
@@ -151,7 +150,6 @@ class ConfigServiceImpl implements ConfigService {
         return file;
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public File getFileDir(String name) {
         final StrictMode.ThreadPolicy oldPolicy = StrictMode.allowThreadDiskWrites();
@@ -177,7 +175,6 @@ class ConfigServiceImpl implements ConfigService {
         return file;
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public File getCacheDir() {
         final StrictMode.ThreadPolicy oldPolicy = StrictMode.allowThreadDiskWrites();

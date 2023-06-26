@@ -199,7 +199,6 @@ class SessionServiceImpl implements SessionService {
         mSession.saveString(key, value);
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void saveStringSet(String key, Set<String> value) {
         mSession.saveStringSet(key, value);
