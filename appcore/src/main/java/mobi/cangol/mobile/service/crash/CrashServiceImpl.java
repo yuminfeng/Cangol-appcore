@@ -65,7 +65,6 @@ class CrashServiceImpl implements CrashService, UncaughtExceptionHandler {
     private Map<String, String> mParams;
     private String mCrashDir;
 
-    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     @Override
     public void onCreate(Application context) {
         mApplication = (CoreApplication) context;

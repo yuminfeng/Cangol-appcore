@@ -101,7 +101,6 @@ class ConfigServiceImpl implements ConfigService {
         return mAppDir;
     }
 
-    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     @Override
     public void setCustomAppDir(String path) {
         if(mDebug) Log.d(TAG,"setCustomAppDir "+path);

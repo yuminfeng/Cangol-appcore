@@ -39,7 +39,6 @@ public class StringUtils {
      * @param value
      * @return
      */
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static String byte2String(byte[] value) {
         return (value == null) ? "" : new String(value, StandardCharsets.UTF_8);
     }
@@ -169,7 +168,6 @@ public class StringUtils {
      * @param s
      * @return
      */
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static String md5(String s) {
         final char[] hexDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
                 'a', 'b', 'c', 'd', 'e', 'f'};

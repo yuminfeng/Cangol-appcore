@@ -48,7 +48,6 @@ public class StatAgent {
     private Session session;
     private CrashService crashService;
     private String statServerURL=null;
-    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     protected StatAgent(CoreApplication coreApplication) {
         this.context = coreApplication;
         session = ((SessionService) coreApplication.getAppService(AppService.SESSION_SERVICE)).getSession();

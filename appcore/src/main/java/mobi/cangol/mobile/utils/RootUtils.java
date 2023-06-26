@@ -59,7 +59,6 @@ public class RootUtils {
      */
     private static class ExecShell {
 
-        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         public List<String> executeCommand(SHELL_CMD shellCmd) {
             String line = null;
             final List<String> fullResponse = new ArrayList<>();

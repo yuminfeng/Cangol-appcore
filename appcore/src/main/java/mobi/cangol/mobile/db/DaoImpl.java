@@ -29,7 +29,6 @@ import java.util.List;
 
 import mobi.cangol.mobile.logging.Log;
 
-@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 class DaoImpl<T, I> implements Dao<T, I> {
     private CoreSQLiteOpenHelper mDatabaseHelper;
     private String mTableName;

@@ -271,7 +271,6 @@ public class Session {
         });
     }
 
-    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     public void refresh() {
         final StrictMode.ThreadPolicy oldPolicy = StrictMode.allowThreadDiskReads();
         final Map<String, ?> map = getShared().getAll();

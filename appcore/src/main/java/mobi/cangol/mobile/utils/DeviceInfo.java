@@ -238,11 +238,7 @@ public final class DeviceInfo {
     public static String getResolution(Context context) {
         final DisplayMetrics dm = new DisplayMetrics();
         final WindowManager wm = (WindowManager) context.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            wm.getDefaultDisplay().getRealMetrics(dm);
-        } else {
-            wm.getDefaultDisplay().getMetrics(dm);
-        }
+        wm.getDefaultDisplay().getRealMetrics(dm);
         return dm.widthPixels + "x" + dm.heightPixels;
     }
 
@@ -832,17 +828,11 @@ public final class DeviceInfo {
      * @return
      */
     public static boolean isProxy(Context context) {
-        final boolean IS_ICS_OR_LATER = Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH;
         String proxyAddress;
         int proxyPort;
-        if (IS_ICS_OR_LATER) {
-            proxyAddress = System.getProperty("http.proxyHost");
-            final String portStr = System.getProperty("http.proxyPort");
-            proxyPort = Integer.parseInt((portStr != null ? portStr : "-1"));
-        } else {
-            proxyAddress = android.net.Proxy.getHost(context);
-            proxyPort = android.net.Proxy.getPort(context);
-        }
+        proxyAddress = System.getProperty("http.proxyHost");
+        final String portStr = System.getProperty("http.proxyPort");
+        proxyPort = Integer.parseInt((portStr != null ? portStr : "-1"));
         return (!TextUtils.isEmpty(proxyAddress)) && (proxyPort != -1);
     }
 
@@ -885,38 +875,16 @@ public final class DeviceInfo {
      * @return
      */
     public static boolean checkDeviceHasNavigationBar(Context context) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            final WindowManager windowManager = (WindowManager) context.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
-            final Display display = windowManager.getDefaultDisplay();
-            final DisplayMetrics realDisplayMetrics = new DisplayMetrics();
-            display.getRealMetrics(realDisplayMetrics);
-            final int realHeight = realDisplayMetrics.heightPixels;
-            final int realWidth = realDisplayMetrics.widthPixels;
-            final DisplayMetrics displayMetrics = new DisplayMetrics();
-            display.getMetrics(displayMetrics);
-            final int displayHeight = displayMetrics.heightPixels;
-            final int displayWidth = displayMetrics.widthPixels;
-            return (realWidth - displayWidth) > 0 || (realHeight - displayHeight) > 0;
-        } else {
-            boolean hasNavigationBar = false;
-            final Resources resources = context.getResources();
-            final int id = resources.getIdentifier("config_showNavigationBar", "bool", ANDROID);
-            if (id > 0) {
-                hasNavigationBar = resources.getBoolean(id);
-            }
-            try {
-                final Class systemPropertiesClass = Class.forName("android.os.SystemProperties");
-                final Method m = systemPropertiesClass.getMethod("get", String.class);
-                final String navBarOverride = (String) m.invoke(systemPropertiesClass, "qemu.hw.mainkeys");
-                if ("1".equals(navBarOverride)) {
-                    hasNavigationBar = false;
-                } else if ("0".equals(navBarOverride)) {
-                    hasNavigationBar = true;
-                }
-            } catch (Exception e) {
-                Log.d(e.getMessage());
-            }
-            return hasNavigationBar;
-        }
+        final WindowManager windowManager = (WindowManager) context.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        final Display display = windowManager.getDefaultDisplay();
+        final DisplayMetrics realDisplayMetrics = new DisplayMetrics();
+        display.getRealMetrics(realDisplayMetrics);
+        final int realHeight = realDisplayMetrics.heightPixels;
+        final int realWidth = realDisplayMetrics.widthPixels;
+        final DisplayMetrics displayMetrics = new DisplayMetrics();
+        display.getMetrics(displayMetrics);
+        final int displayHeight = displayMetrics.heightPixels;
+        final int displayWidth = displayMetrics.widthPixels;
+        return (realWidth - displayWidth) > 0 || (realHeight - displayHeight) > 0;
     }
 }

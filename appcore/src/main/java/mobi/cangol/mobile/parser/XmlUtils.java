@@ -122,7 +122,6 @@ public class XmlUtils extends Converter {
      * @return
      * @throws XMLParserException
      */
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static <T> T parserToObject(Class<T> c, String str, boolean useAnnotation) throws XMLParserException {
         return parserToObject(c, new ByteArrayInputStream(str.getBytes(StandardCharsets.UTF_8)), useAnnotation);
     }
@@ -153,7 +152,6 @@ public class XmlUtils extends Converter {
      * @return
      * @throws XMLParserException
      */
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static <T> List<T> parserToList(Class<T> c, String str, boolean useAnnotation) throws XMLParserException {
         return parserToList(c, new ByteArrayInputStream(str.getBytes(StandardCharsets.UTF_8)), useAnnotation);
     }
