@@ -14,8 +14,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import mobi.cangol.mobile.CoreApplication;
-import mobi.cangol.mobile.appcore.demo.fragment.MainFragment;
 import mobi.cangol.mobile.appcore.demo.R;
+import mobi.cangol.mobile.appcore.demo.fragment.MainFragment;
 import mobi.cangol.mobile.logging.Log;
 import mobi.cangol.mobile.service.AppService;
 import mobi.cangol.mobile.service.route.OnNavigation;

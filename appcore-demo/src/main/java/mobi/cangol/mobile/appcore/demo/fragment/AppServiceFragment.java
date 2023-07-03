@@ -1,7 +1,5 @@
 package mobi.cangol.mobile.appcore.demo.fragment;
 
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
