@@ -30,9 +30,9 @@ import mobi.cangol.mobile.stat.StatAgent;
  */
 public class SecurityFragment extends Fragment {
     private static final String TAG = "SecurityFragment";
-    private EditText editText1,editText2;
-    private TextView textView1,textView2;
-    private Button button1,button2,button3,button4,button5,button6,button7,button8;
+    private EditText editText1, editText2;
+    private TextView textView1, textView2;
+    private Button button1, button2, button3, button4, button5, button6, button7, button8;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,8 +52,8 @@ public class SecurityFragment extends Fragment {
     }
 
     private void initViews() {
-        editText1= this.getView().findViewById(R.id.editText1);
-        editText2= this.getView().findViewById(R.id.editText2);
+        editText1 = this.getView().findViewById(R.id.editText1);
+        editText2 = this.getView().findViewById(R.id.editText2);
         textView1 = this.getView().findViewById(R.id.textView1);
 
         button1 = this.getView().findViewById(R.id.button1);
@@ -66,8 +66,8 @@ public class SecurityFragment extends Fragment {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String str=editText1.getText().toString();
-                if(!TextUtils.isEmpty(str))
+                String str = editText1.getText().toString();
+                if (!TextUtils.isEmpty(str))
                     aesEncode(str);
 
             }
@@ -75,16 +75,16 @@ public class SecurityFragment extends Fragment {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String str=editText2.getText().toString();
-                if(!TextUtils.isEmpty(str))
+                String str = editText2.getText().toString();
+                if (!TextUtils.isEmpty(str))
                     aesDecode(str);
             }
         });
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String str=editText1.getText().toString();
-                if(!TextUtils.isEmpty(str))
+                String str = editText1.getText().toString();
+                if (!TextUtils.isEmpty(str))
                     base64Encode(str);
 
             }
@@ -92,16 +92,16 @@ public class SecurityFragment extends Fragment {
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String str=editText2.getText().toString();
-                if(!TextUtils.isEmpty(str))
+                String str = editText2.getText().toString();
+                if (!TextUtils.isEmpty(str))
                     base64Decode(str);
             }
         });
         button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String str=editText1.getText().toString();
-                if(!TextUtils.isEmpty(str))
+                String str = editText1.getText().toString();
+                if (!TextUtils.isEmpty(str))
                     rsaEncode(str);
 
             }
@@ -109,8 +109,8 @@ public class SecurityFragment extends Fragment {
         button6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String str=editText2.getText().toString();
-                if(!TextUtils.isEmpty(str))
+                String str = editText2.getText().toString();
+                if (!TextUtils.isEmpty(str))
                     rsaDecode(str);
             }
         });
@@ -118,56 +118,61 @@ public class SecurityFragment extends Fragment {
         textView1.setMovementMethod(ScrollingMovementMethod.getInstance());
         textView1.setText("--------------Security---------------");
     }
+
     private void printLog(String message) {
         textView1.setMovementMethod(ScrollingMovementMethod.getInstance());
         textView1.setText("--------------Security---------------");
-        textView1.append("\n"+message);
+        textView1.append("\n" + message);
         Log.d(message);
     }
+
     private void aesEncode(String str) {
-        String content=""+str;
+        String content = "" + str;
         try {
-            String result=AESUtils.encrypt("12345678",content);
+            String result = AESUtils.encrypt("12345678", content);
             editText2.setText(result);
-            printLog(content+" -->> "+result);
+            printLog(content + " -->> " + result);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
+
     private void aesDecode(String str) {
-        String content=""+str;
+        String content = "" + str;
         try {
-            String result=AESUtils.decrypt("12345678",content);
+            String result = AESUtils.decrypt("12345678", content);
             editText1.setText(result);
-            printLog(content+" -->> "+result);
+            printLog(content + " -->> " + result);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private void base64Encode(String str) {
-        String content=""+str;
+        String content = "" + str;
         try {
-            String result=Base64.encode(content);
+            String result = Base64.encode(content);
             editText2.setText(result);
-            printLog(content+" -->> "+result);
+            printLog(content + " -->> " + result);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
+
     private void base64Decode(String str) {
-        String content=""+str;
+        String content = "" + str;
         try {
-            String result=Base64.decode(content);
+            String result = Base64.decode(content);
             editText1.setText(result);
-            printLog(content+" -->> "+result);
+            printLog(content + " -->> " + result);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    static{
+
+    static {
         Map<String, Object> map = null;
         try {
             map = RSAUtils.getKeys();
@@ -187,32 +192,34 @@ public class SecurityFragment extends Fragment {
         //明文
         String ming = "123456789";
         //使用模和指数生成公钥和私钥
-         pubKey = RSAUtils.getPublicKey(modulus, public_exponent);
-         priKey = RSAUtils.getPrivateKey(modulus, private_exponent);
+        pubKey = RSAUtils.getPublicKey(modulus, public_exponent);
+        priKey = RSAUtils.getPrivateKey(modulus, private_exponent);
     }
+
     static RSAPublicKey pubKey;
     static RSAPrivateKey priKey;
+
     private void rsaEncode(String str) {
-        String content=""+str;
+        String content = "" + str;
         try {
-            String result=RSAUtils.encryptByPublicKey(content,pubKey);
+            String result = RSAUtils.encryptByPublicKey(content, pubKey);
             editText2.setText(result);
-            printLog(content+" -->> "+result);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    private void rsaDecode(String str) {
-        String content=""+str;
-        try {
-            String result=RSAUtils.decryptByPrivateKey(content,priKey);
-            editText1.setText(result);
-            printLog(content+" -->> "+result);
+            printLog(content + " -->> " + result);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    private void rsaDecode(String str) {
+        String content = "" + str;
+        try {
+            String result = RSAUtils.decryptByPrivateKey(content, priKey);
+            editText1.setText(result);
+            printLog(content + " -->> " + result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
     @Override

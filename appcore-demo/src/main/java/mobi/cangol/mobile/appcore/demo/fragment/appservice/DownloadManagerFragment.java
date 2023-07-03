@@ -38,20 +38,21 @@ import mobi.cangol.mobile.utils.StringUtils;
  */
 public class DownloadManagerFragment extends Fragment {
     private static final String TAG = "DownloadManagerFragment";
-    private String url2="http://music-hotpot.oss-cn-hongkong.aliyuncs.com/songs/803263126016617416171574.mp3";
-    private String url1="http://music-hotpot.oss-cn-hongkong.aliyuncs.com/songs/626841935812471620885564.mp3";
+    private String url2 = "http://music-hotpot.oss-cn-hongkong.aliyuncs.com/songs/803263126016617416171574.mp3";
+    private String url1 = "http://music-hotpot.oss-cn-hongkong.aliyuncs.com/songs/626841935812471620885564.mp3";
     private ConfigService configService;
     private DownloadManager downloadManager;
     private AppDownloadExecutor downloadExecutor;
-    private DownloadResource downloadResource1,downloadResource2;
-    private TextView textView1,textView2;
+    private DownloadResource downloadResource1, downloadResource2;
+    private TextView textView1, textView2;
     private Button button11, button12, button13, button14;
     private Button button21, button22, button23, button24;
     private CoreApplication application;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        application=((CoreApplication) this.getActivity().getApplicationContext());
+        application = ((CoreApplication) this.getActivity().getApplicationContext());
         configService = (ConfigService) application.getAppService(AppService.CONFIG_SERVICE);
         downloadManager = (DownloadManager) application.getAppService(AppService.DOWNLOAD_MANAGER);
         downloadManager.setDebug(true);
@@ -68,6 +69,7 @@ public class DownloadManagerFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         initViews();
     }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -79,6 +81,7 @@ public class DownloadManagerFragment extends Fragment {
         super.onResume();
         //StatAgent.getInstance().onFragmentResume(TAG);
     }
+
     private void initViews() {
         textView1 = this.getView().findViewById(R.id.textView1);
         button11 = this.getView().findViewById(R.id.button11);
@@ -89,8 +92,8 @@ public class DownloadManagerFragment extends Fragment {
         button11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                App app=new App("QQ", url1);
-                downloadResource1=downloadExecutor.getDownloadResource(app);
+                App app = new App("QQ", url1);
+                downloadResource1 = downloadExecutor.getDownloadResource(app);
                 FileUtils.delete(downloadResource1.getConfFile());
                 FileUtils.delete(downloadResource1.getSourceFile());
                 downloadExecutor.add(downloadResource1);
@@ -126,8 +129,8 @@ public class DownloadManagerFragment extends Fragment {
         button21.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                App app=new App("Wechat", url2);
-                downloadResource2=downloadExecutor.getDownloadResource(app);
+                App app = new App("Wechat", url2);
+                downloadResource2 = downloadExecutor.getDownloadResource(app);
                 //FileUtils.delete(downloadResource2.getConfFile());
                 //FileUtils.delete(downloadResource2.getSourceFile());
                 downloadExecutor.add(downloadResource2);
@@ -155,31 +158,32 @@ public class DownloadManagerFragment extends Fragment {
 
 
         //String path="/sdcard/appcore";
-       // boolean result=configService.setCustomAppDir(path);
+        // boolean result=configService.setCustomAppDir(path);
         //Log.d("setCustomAppDir " + (result ? "success" : "fail")+" "  + path);
 
         downloadExecutor = (AppDownloadExecutor) downloadManager.getDownloadExecutor("app");
         downloadExecutor.registerDownloadStatusListener(new DownloadStatusListener() {
             @Override
             public void onStatusChange(DownloadResource resource, int type) {
-                Log.d(TAG,"onStatusChange "+type);
-                if(resource!=null){
-                    if(resource.getFileName().contains("QQ")){
-                        updateViews(textView1,resource);
-                    }else{
-                        updateViews(textView2,resource);
+                Log.d(TAG, "onStatusChange " + type);
+                if (resource != null) {
+                    if (resource.getFileName().contains("QQ")) {
+                        updateViews(textView1, resource);
+                    } else {
+                        updateViews(textView2, resource);
                     }
-                    if(resource.getStatus()== Download.STATUS_FINISH&&type==Download.ACTION_DOWNLOAD_FINISH){
-                        copyToDownloads(resource.getFileName(),resource.getSourceFile());
+                    if (resource.getStatus() == Download.STATUS_FINISH && type == Download.ACTION_DOWNLOAD_FINISH) {
+                        copyToDownloads(resource.getFileName(), resource.getSourceFile());
                     }
                 }
             }
         });
 
     }
-    private void copyToDownloads(final String filename,final String filepath){
-        Log.d(TAG," copyToDownloads "+filepath );
-        final String downloadDir=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
+
+    private void copyToDownloads(final String filename, final String filepath) {
+        Log.d(TAG, " copyToDownloads " + filepath);
+        final String downloadDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
 //        FileUtils.copyFile(filepath,downloadDir+"/"+filename);
 //        scanFileAsync(downloadDir+"/"+filename);
 
@@ -200,25 +204,27 @@ public class DownloadManagerFragment extends Fragment {
         application.post(new Runnable() {
             @Override
             public void run() {
-                Log.d(TAG,"Runnable copyFile "+filepath+"=>"+downloadDir+"/"+filename);
-                FileUtils.copyFile(filepath,downloadDir+"/"+filename);
+                Log.d(TAG, "Runnable copyFile " + filepath + "=>" + downloadDir + "/" + filename);
+                FileUtils.copyFile(filepath, downloadDir + "/" + filename);
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        scanFileAsync(downloadDir+"/"+filename);
+                        scanFileAsync(downloadDir + "/" + filename);
                     }
                 });
             }
         });
     }
+
     public void scanFileAsync(String filePath) {
-        File file=new File(filePath);
-        Log.d(TAG,"scanFileAsync "+file.exists()+","+file.getAbsolutePath());
-        Intent mediaScanIntent = new Intent( Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File file = new File(filePath);
+        Log.d(TAG, "scanFileAsync " + file.exists() + "," + file.getAbsolutePath());
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         mediaScanIntent.setData(Uri.fromFile(file));
         getContext().sendBroadcast(mediaScanIntent);
     }
-    private void updateViews(TextView textView,DownloadResource downloadResource) {
+
+    private void updateViews(TextView textView, DownloadResource downloadResource) {
         textView.setText("--------------Download---------------");
         if (downloadResource != null) {
             textView.append("\ngetFileName=" + downloadResource.getFileName());
@@ -227,7 +233,7 @@ public class DownloadManagerFragment extends Fragment {
             textView.append("\ngetCompleteSize=" + downloadResource.getCompleteSize() + "/" + downloadResource.getFileLength());
             textView.append("\ngetProgress=" + downloadResource.getProgress());
             textView.append("\ngetSpeed=" + StringUtils.formatSpeed(downloadResource.getSpeed()));
-        }else{
+        } else {
             textView.append("\ndownloadResource=" + downloadResource);
         }
     }
@@ -242,18 +248,18 @@ class AppDownloadExecutor extends DownloadExecutor<App> {
 
     @Override
     protected DownloadResource getDownloadResource(App app) {
-        return new DownloadResource(this.getDownloadDir().getAbsolutePath(),app.url, app.name + ".mp3");
+        return new DownloadResource(this.getDownloadDir().getAbsolutePath(), app.url, app.name + ".mp3");
     }
 
     @Override
     protected App getDownloadModel(DownloadResource resource) {
-        return new App(resource.getFileName().replace(".mp3", ""),resource.getUrl());
+        return new App(resource.getFileName().replace(".mp3", ""), resource.getUrl());
     }
 
     @Override
     public DownloadNotification notification(Context context, DownloadResource resource) {
-        Log.d("resource: "+resource.getSourceFile());
-        File file=new File(resource.getSourceFile().replace(".tmp", ""));
+        Log.d("resource: " + resource.getSourceFile());
+        File file = new File(resource.getSourceFile().replace(".tmp", ""));
         Uri uri = null;
         Intent intent = new Intent(Intent.ACTION_VIEW);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -278,7 +284,7 @@ class App {
     public App() {
     }
 
-    public App( String name,String url) {
+    public App(String name, String url) {
         this.name = name;
         this.url = url;
     }

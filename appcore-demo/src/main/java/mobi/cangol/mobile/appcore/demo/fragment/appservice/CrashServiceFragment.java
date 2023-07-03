@@ -22,11 +22,12 @@ import mobi.cangol.mobile.stat.StatAgent;
 /**
  * Created by weixuewu on 16/4/30.
  */
-public class CrashServiceFragment extends Fragment{
+public class CrashServiceFragment extends Fragment {
     private static final String TAG = "CrashServiceFragment";
     private CrashService crashService;
     private Button button1;
     private TextView textView1;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,11 +39,13 @@ public class CrashServiceFragment extends Fragment{
         View v = inflater.inflate(R.layout.fragment_service_crash, container, false);
         return v;
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initViews();
     }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -54,7 +57,8 @@ public class CrashServiceFragment extends Fragment{
         super.onResume();
         StatAgent.getInstance().onFragmentResume(TAG);
     }
-    private void initViews(){
+
+    private void initViews() {
         textView1 = this.getView().findViewById(R.id.textView1);
         button1 = this.getView().findViewById(R.id.button1);
 
@@ -64,16 +68,17 @@ public class CrashServiceFragment extends Fragment{
                 throw new NullPointerException("crash test");
             }
         });
-        crashService.report(new CrashReportListener(){
+        crashService.report(new CrashReportListener() {
 
             @Override
-            public void report(String path,String error,String position,String context,String timestamp,String fatal) {
-                updateViews(path,error,position,context,timestamp,fatal);
+            public void report(String path, String error, String position, String context, String timestamp, String fatal) {
+                updateViews(path, error, position, context, timestamp, fatal);
             }
 
         });
     }
-    private void updateViews(String path,String error,String position,String context,String timestamp,String fatal) {
+
+    private void updateViews(String path, String error, String position, String context, String timestamp, String fatal) {
         textView1.setMovementMethod(ScrollingMovementMethod.getInstance());
         textView1.setText("--------------crash---------------");
         textView1.append("\n\npath=" + path);

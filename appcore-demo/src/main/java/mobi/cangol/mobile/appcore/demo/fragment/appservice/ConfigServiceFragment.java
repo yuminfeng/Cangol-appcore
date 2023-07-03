@@ -26,7 +26,7 @@ public class ConfigServiceFragment extends Fragment {
     private static final String TAG = "ConfigServiceFragment";
     private ConfigService configService;
     private TextView textView1;
-    private Button button1, button2,button3,button4;
+    private Button button1, button2, button3, button4;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,7 @@ public class ConfigServiceFragment extends Fragment {
         initViews();
         updateViews();
     }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -57,9 +58,11 @@ public class ConfigServiceFragment extends Fragment {
         super.onResume();
         StatAgent.getInstance().onFragmentResume(TAG);
     }
+
     private void showToast(String msg) {
         Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
     }
+
     private void initViews() {
         textView1 = this.getView().findViewById(R.id.textView1);
         button1 = this.getView().findViewById(R.id.button1);
@@ -69,9 +72,9 @@ public class ConfigServiceFragment extends Fragment {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String path="/sdcard/appcore";
-                 configService.setCustomAppDir(path);
-                showToast("setCustomAppDir "+configService.getAppDir());
+                String path = "/sdcard/appcore";
+                configService.setCustomAppDir(path);
+                showToast("setCustomAppDir " + configService.getAppDir());
                 updateViews();
             }
         });

@@ -23,6 +23,7 @@ public class UtilsFragment extends Fragment {
     private static final String TAG = "UtilsFragment";
     private TextView textView1;
     private Button button1;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,55 +49,57 @@ public class UtilsFragment extends Fragment {
             public void onClick(View v) {
                 textView1.setMovementMethod(ScrollingMovementMethod.getInstance());
                 textView1.setText("\n--------------Utils---------------\n");
-                StringBuilder sb=new StringBuilder();
+                StringBuilder sb = new StringBuilder();
 
-                sb.append("\nCharset="+DeviceInfo.getCharset());
-                sb.append("\nCountry="+DeviceInfo.getCountry());
-                sb.append("\nLanguage="+DeviceInfo.getLanguage());
-                sb.append("\nLocale="+DeviceInfo.getLocale());
-                sb.append("\nOS="+DeviceInfo.getOS());
-                sb.append("\nOSVersion="+DeviceInfo.getOSVersion());
-                sb.append("\nDeviceBrand="+DeviceInfo.getDeviceBrand());
-                sb.append("\nAppVersion="+DeviceInfo.getAppVersion(getContext()));
-                sb.append("\nSHA1Fingerprint="+DeviceInfo.getSHA1Fingerprint(getContext()));
-                sb.append("\nMD5Fingerprint="+DeviceInfo.getMD5Fingerprint(getContext()));
-                sb.append("\ngetMobileInfo="+DeviceInfo.getMobileInfo()+"\n---------|\n");
-                sb.append("\nMemTotalSize="+DeviceInfo.getMemTotalSize());
-                sb.append("\nMemFreeSize="+DeviceInfo.getMemFreeSize());
-                sb.append("\nMemUsedPer="+(100f*(DeviceInfo.getMemTotalSize()-DeviceInfo.getMemFreeSize())/DeviceInfo.getMemTotalSize()*1.0f)+"%");
-                sb.append("\nMemInfo="+DeviceInfo.getMemInfo()+"\n---------|\n");
-                sb.append("\nCPUABI="+DeviceInfo.getCPUABI());
-                sb.append("\nCPUInfo="+DeviceInfo.getCPUInfo()+"\n---------|\n");
-                sb.append("\nResolution="+DeviceInfo.getResolution(getContext()));
-                sb.append("\nDensity="+DeviceInfo.getDensity(getContext()));
-                sb.append("\nDensityDpi="+DeviceInfo.getDensityDpi(getContext()));
-                sb.append("\nDensityDpiStr="+DeviceInfo.getDensityDpiStr(getContext()));
-                sb.append("\nScreenSize="+DeviceInfo.getScreenSize(getContext()));
-                sb.append("\nStatusBarHeight="+DeviceInfo.getStatusBarHeight(getContext()));
-                sb.append("\nNavigationBarHeight="+DeviceInfo.getNavigationBarHeight(getContext()));
-                sb.append("\nDisplayMetrics="+DeviceInfo.getDisplayMetrics(getContext()));
+                sb.append("\nCharset=" + DeviceInfo.getCharset());
+                sb.append("\nCountry=" + DeviceInfo.getCountry());
+                sb.append("\nLanguage=" + DeviceInfo.getLanguage());
+                sb.append("\nLocale=" + DeviceInfo.getLocale());
+                sb.append("\nOS=" + DeviceInfo.getOS());
+                sb.append("\nOSVersion=" + DeviceInfo.getOSVersion());
+                sb.append("\nDeviceBrand=" + DeviceInfo.getDeviceBrand());
+                sb.append("\nAppVersion=" + DeviceInfo.getAppVersion(getContext()));
+                sb.append("\nSHA1Fingerprint=" + DeviceInfo.getSHA1Fingerprint(getContext()));
+                sb.append("\nMD5Fingerprint=" + DeviceInfo.getMD5Fingerprint(getContext()));
+                sb.append("\ngetMobileInfo=" + DeviceInfo.getMobileInfo() + "\n---------|\n");
+                sb.append("\nMemTotalSize=" + DeviceInfo.getMemTotalSize());
+                sb.append("\nMemFreeSize=" + DeviceInfo.getMemFreeSize());
+                sb.append("\nMemUsedPer=" + (100f * (DeviceInfo.getMemTotalSize() - DeviceInfo.getMemFreeSize()) / DeviceInfo.getMemTotalSize() * 1.0f) + "%");
+                sb.append("\nMemInfo=" + DeviceInfo.getMemInfo() + "\n---------|\n");
+                sb.append("\nCPUABI=" + DeviceInfo.getCPUABI());
+                sb.append("\nCPUInfo=" + DeviceInfo.getCPUInfo() + "\n---------|\n");
+                sb.append("\nResolution=" + DeviceInfo.getResolution(getContext()));
+                sb.append("\nDensity=" + DeviceInfo.getDensity(getContext()));
+                sb.append("\nDensityDpi=" + DeviceInfo.getDensityDpi(getContext()));
+                sb.append("\nDensityDpiStr=" + DeviceInfo.getDensityDpiStr(getContext()));
+                sb.append("\nScreenSize=" + DeviceInfo.getScreenSize(getContext()));
+                sb.append("\nStatusBarHeight=" + DeviceInfo.getStatusBarHeight(getContext()));
+                sb.append("\nNavigationBarHeight=" + DeviceInfo.getNavigationBarHeight(getContext()));
+                sb.append("\nDisplayMetrics=" + DeviceInfo.getDisplayMetrics(getContext()));
 
-                sb.append("\nisConnection="+DeviceInfo.isConnection(getContext()));
-                sb.append("\nisWifiConnection="+DeviceInfo.isWifiConnection(getContext()));
-                sb.append("\ngetIpStr="+DeviceInfo.getIpStr(getContext()));
-                sb.append("\ngetIpAddress="+DeviceInfo.getIpAddress(getContext()));
-                sb.append("\nNetworkOperatorName="+DeviceInfo.getNetworkOperatorName(getContext()));
-                sb.append("\nNetworkClassName="+DeviceInfo.getNetworkClassName(getContext()));
-                sb.append("\nWifiRssiString="+DeviceInfo.getWifiRssiString(getContext()));
-                sb.append("\nWifiRssi="+DeviceInfo.getWifiRssi(getContext()));
-                sb.append("\nisAppProcessByFile="+DeviceInfo.isAppProcessByFile(getContext()));
+                sb.append("\nisConnection=" + DeviceInfo.isConnection(getContext()));
+                sb.append("\nisWifiConnection=" + DeviceInfo.isWifiConnection(getContext()));
+                sb.append("\ngetIpStr=" + DeviceInfo.getIpStr(getContext()));
+                sb.append("\ngetIpAddress=" + DeviceInfo.getIpAddress(getContext()));
+                sb.append("\nNetworkOperatorName=" + DeviceInfo.getNetworkOperatorName(getContext()));
+                sb.append("\nNetworkClassName=" + DeviceInfo.getNetworkClassName(getContext()));
+                sb.append("\nWifiRssiString=" + DeviceInfo.getWifiRssiString(getContext()));
+                sb.append("\nWifiRssi=" + DeviceInfo.getWifiRssi(getContext()));
+                sb.append("\nisAppProcessByFile=" + DeviceInfo.isAppProcessByFile(getContext()));
 //                sb.append("\nisAppProcess="+DeviceInfo.isAppProcess(getContext()));
-                sb.append("\nisProxy="+DeviceInfo.isProxy(getContext()));
+                sb.append("\nisProxy=" + DeviceInfo.isProxy(getContext()));
 
                 printLog(sb.toString());
             }
         });
     }
+
     private void printLog(String message) {
         textView1.setMovementMethod(ScrollingMovementMethod.getInstance());
         textView1.append(message);
         Log.d(message);
     }
+
     @Override
     public void onPause() {
         super.onPause();

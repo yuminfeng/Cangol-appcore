@@ -34,10 +34,11 @@ import mobi.cangol.mobile.stat.StatAgent;
 public class DatabaseFragment extends Fragment {
     private static final String TAG = "DatabaseFragment";
     private ListView listView;
-    private Button button0,button1, button2,button3;
+    private Button button0, button1, button2, button3;
     private DataService dataService;
     private AtomicInteger atomicInteger;
     private ArrayAdapter simpleAdapter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,52 +89,57 @@ public class DatabaseFragment extends Fragment {
                 delData();
             }
         });
-        simpleAdapter=new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,new ArrayList<Data>());
+        simpleAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, new ArrayList<Data>());
         listView.setAdapter(simpleAdapter);
 
     }
+
     private void loadData() {
         simpleAdapter.clear();
-        List<Data> list=dataService.findListByName("1");
+        List<Data> list = dataService.findListByName("1");
         simpleAdapter.addAll(list);
     }
+
     private void addData() {
 //        Data data=new Data("name_" + atomicInteger.addAndGet(1));
 //        data.setNickname("nickname_"+new Random().nextInt(100));
 //        dataService.save(data);
 //        dataService.refresh(data);
 //        simpleAdapter.add(data);
-        List<Data> list=new ArrayList<>();
-        int size=10;
-        Data data=null;
+        List<Data> list = new ArrayList<>();
+        int size = 10;
+        Data data = null;
         for (int i = 0; i < size; i++) {
-            data=new Data("name_" + i);
-            data.setNickname("nickname_"+i);
+            data = new Data("name_" + i);
+            data.setNickname("nickname_" + i);
             list.add(data);
         }
         Log.e("idle start");
-        long start=System.currentTimeMillis();
+        long start = System.currentTimeMillis();
         dataService.createAll(list);
-        Log.e("idle end "+(System.currentTimeMillis()-start)/size+"ms");
+        Log.e("idle end " + (System.currentTimeMillis() - start) / size + "ms");
     }
+
     private void updateData() {
-        List<Data> list=dataService.findListByName("1");
+        List<Data> list = dataService.findListByName("1");
         for (int i = 0; i < list.size(); i++) {
-            list.get(i).setName(list.get(i).getName()+"a");
-            list.get(i).setNickname(list.get(i).getNickname()+"a");
+            list.get(i).setName(list.get(i).getName() + "a");
+            list.get(i).setNickname(list.get(i).getNickname() + "a");
         }
         Log.e("idle start");
-        long start=System.currentTimeMillis();
-        dataService.updateAll(list,"name");
-        Log.e("idle end "+(System.currentTimeMillis()-start)+"ms");
+        long start = System.currentTimeMillis();
+        dataService.updateAll(list, "name");
+        Log.e("idle end " + (System.currentTimeMillis() - start) + "ms");
     }
+
     private void delData() {
-        if(simpleAdapter.getCount()>0){
-            Data data= (Data) simpleAdapter.getItem(simpleAdapter.getCount()-1);
+        if (simpleAdapter.getCount() > 0) {
+            Data data = (Data) simpleAdapter.getItem(simpleAdapter.getCount() - 1);
             dataService.delete(data.getId());
             simpleAdapter.remove(data);
         }
     }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -228,9 +234,9 @@ class DataService implements BaseService<Data> {
         return -1;
     }
 
-    public void updateAll(List<Data> list,String... columns) {
+    public void updateAll(List<Data> list, String... columns) {
         try {
-            dao.update(list,columns);
+            dao.update(list, columns);
         } catch (Exception e) {
             e.printStackTrace();
             android.util.Log.e(TAG, "DataService delete fail!");
@@ -247,6 +253,7 @@ class DataService implements BaseService<Data> {
         }
         return null;
     }
+
     public void createAll(List<Data> list) {
         try {
             dao.create(list);
@@ -254,6 +261,7 @@ class DataService implements BaseService<Data> {
             Log.e(TAG, "DataService createAll fail!" + e.getMessage());
         }
     }
+
     @Override
     public List<Data> findList(QueryBuilder queryBuilder) {
         return dao.query(queryBuilder);
@@ -261,9 +269,9 @@ class DataService implements BaseService<Data> {
 
     public List<Data> findListByName(String name) {
         QueryBuilder queryBuilder = new QueryBuilder(Data.class);
-        queryBuilder.addQuery("name", name, "like",true);
-        queryBuilder.addQuery("nickname", name, "like",true);
-        return dao.query(queryBuilder,"name");
+        queryBuilder.addQuery("name", name, "like", true);
+        queryBuilder.addQuery("nickname", name, "like", true);
+        return dao.query(queryBuilder, "name");
     }
 
 }
@@ -296,8 +304,8 @@ class DatabaseHelper extends CoreSQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         Log.d(TAG, "onCreate");
         DatabaseUtils.createTable(db, Data.class);
-        DatabaseUtils.createIndex(db,Data.class,"teIndex","name","nickname");
-        DatabaseUtils.addColumn(db,Data.class,"nickname1");
+        DatabaseUtils.createIndex(db, Data.class, "teIndex", "name", "nickname");
+        DatabaseUtils.addColumn(db, Data.class, "nickname1");
     }
 
     @Override
@@ -338,6 +346,7 @@ class Data {
     private String nickname11;
     @DatabaseField
     private String nickname12;
+
     public Data() {
     }
 

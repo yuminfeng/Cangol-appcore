@@ -56,7 +56,7 @@ public class AppServiceFragment extends ListFragment {
         for (int i = 0; i < list.size(); i++) {
             listStr.add(list.get(i).getSimpleName().replace("Fragment", ""));
         }
-        setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, listStr));
+        setListAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, listStr));
     }
 
     @Override

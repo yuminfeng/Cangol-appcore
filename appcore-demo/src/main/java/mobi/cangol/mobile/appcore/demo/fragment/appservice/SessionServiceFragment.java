@@ -26,19 +26,20 @@ import mobi.cangol.mobile.stat.StatAgent;
 /**
  * Created by weixuewu on 16/4/30.
  */
-public class SessionServiceFragment extends Fragment{
+public class SessionServiceFragment extends Fragment {
     private static final String TAG = "SessionServiceFragment";
     private SessionService mSessionService;
     private TextView textView1;
-    private Button button1, button2,button3,button33,button4,button5;
+    private Button button1, button2, button3, button33, button4, button5;
     private Session mSession;
     private Session mUserSession;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mSessionService =((CoreApplication) this.getActivity().getApplicationContext()).getAppService(AppService.SESSION_SERVICE);
-        mSession=mSessionService.getSession();
-        mUserSession=mSessionService.getSession("test");
+        mSessionService = ((CoreApplication) this.getActivity().getApplicationContext()).getAppService(AppService.SESSION_SERVICE);
+        mSession = mSessionService.getSession();
+        mUserSession = mSessionService.getSession("test");
     }
 
     @Override
@@ -46,65 +47,67 @@ public class SessionServiceFragment extends Fragment{
         View v = inflater.inflate(R.layout.fragment_service_session, container, false);
         return v;
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initViews();
         updateViews();
     }
-    private void initViews(){
+
+    private void initViews() {
         textView1 = this.getView().findViewById(R.id.textView1);
         button1 = this.getView().findViewById(R.id.button1);
         button2 = this.getView().findViewById(R.id.button2);
         button3 = this.getView().findViewById(R.id.button3);
-        button33= this.getView().findViewById(R.id.button33);
+        button33 = this.getView().findViewById(R.id.button33);
         button4 = this.getView().findViewById(R.id.button4);
         button5 = this.getView().findViewById(R.id.button5);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mSession.put(TAG,1);
+                mSession.put(TAG, 1);
                 updateViews();
             }
         });
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mSession.put(TAG,new User(1,"Rose","18"));
+                mSession.put(TAG, new User(1, "Rose", "18"));
                 updateViews();
             }
         });
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                JSONObject jsonObject=new JSONObject();
+                JSONObject jsonObject = new JSONObject();
                 try {
-                    jsonObject.put("id",1);
-                    jsonObject.put("name","Rose");
-                    jsonObject.put("age","18");
+                    jsonObject.put("id", 1);
+                    jsonObject.put("name", "Rose");
+                    jsonObject.put("age", "18");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                mSession.saveJSONObject(TAG,jsonObject);
+                mSession.saveJSONObject(TAG, jsonObject);
                 updateViews();
             }
         });
         button33.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                JSONArray jsonArray=new JSONArray();
+                JSONArray jsonArray = new JSONArray();
                 for (int i = 0; i < 4; i++) {
-                    JSONObject jsonObject=new JSONObject();
+                    JSONObject jsonObject = new JSONObject();
                     try {
-                        jsonObject.put("id",i);
-                        jsonObject.put("name","Rose"+i);
-                        jsonObject.put("age","18");
+                        jsonObject.put("id", i);
+                        jsonObject.put("name", "Rose" + i);
+                        jsonObject.put("age", "18");
                         jsonArray.put(jsonObject);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-                mSession.saveJSONArray(TAG,jsonArray);
+                mSession.saveJSONArray(TAG, jsonArray);
                 mSession.refresh();
                 updateViews();
             }
@@ -124,6 +127,7 @@ public class SessionServiceFragment extends Fragment{
             }
         });
     }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -135,6 +139,7 @@ public class SessionServiceFragment extends Fragment{
         super.onResume();
         StatAgent.getInstance().onFragmentResume(TAG);
     }
+
     private void updateViews() {
         textView1.setMovementMethod(ScrollingMovementMethod.getInstance());
         textView1.setText("--------------session---------------");

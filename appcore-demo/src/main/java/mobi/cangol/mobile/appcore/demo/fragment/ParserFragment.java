@@ -33,16 +33,17 @@ import mobi.cangol.mobile.stat.StatAgent;
  * Created by weixuewu on 16/4/30.
  */
 public class ParserFragment extends Fragment {
-    private static final String TAG="ParserFragment";
+    private static final String TAG = "ParserFragment";
     private EditText editText1;
     private TextView textView1;
-    private Button button1,button2,button3,button4,button5;
+    private Button button1, button2, button3, button4, button5;
     private RadioGroup radioGroup;
 
-    private String xmlStr="<?xml version='1.0' encoding='utf-8' standalone='yes' ?><ParserObject><name>Nick</name><id>1</id><height>1.75</height><isChild>true</isChild></ParserObject>";
-    private String jsonStr=" {\"name\":\"Nick\",\"id\":1,\"height\":1.75,\"isChild\":true,\"t\":true,\"r\":\"111\"}";
-    private boolean isJson=true;
+    private String xmlStr = "<?xml version='1.0' encoding='utf-8' standalone='yes' ?><ParserObject><name>Nick</name><id>1</id><height>1.75</height><isChild>true</isChild></ParserObject>";
+    private String jsonStr = " {\"name\":\"Nick\",\"id\":1,\"height\":1.75,\"isChild\":true,\"t\":true,\"r\":\"111\"}";
+    private boolean isJson = true;
     private ParserObject parserObject;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,26 +60,27 @@ public class ParserFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         initViews();
     }
+
     private void initViews() {
-        editText1= this.getView().findViewById(R.id.editText1);
+        editText1 = this.getView().findViewById(R.id.editText1);
         textView1 = this.getView().findViewById(R.id.textView1);
         button1 = this.getView().findViewById(R.id.button1);
         button2 = this.getView().findViewById(R.id.button2);
         button3 = this.getView().findViewById(R.id.button3);
         button4 = this.getView().findViewById(R.id.button4);
         button5 = this.getView().findViewById(R.id.button5);
-        radioGroup= this.getView().findViewById(R.id.radioGroup1);
+        radioGroup = this.getView().findViewById(R.id.radioGroup1);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId){
+                switch (checkedId) {
                     case R.id.radioButton1:
                         editText1.setText(jsonStr);
-                        isJson=true;
+                        isJson = true;
                         break;
                     case R.id.radioButton2:
                         editText1.setText(xmlStr);
-                        isJson=false;
+                        isJson = false;
                         break;
                 }
             }
@@ -86,32 +88,32 @@ public class ParserFragment extends Fragment {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String str=editText1.getText().toString();
-                if(!TextUtils.isEmpty(str)){
-                    parser(str,isJson,false);
-                 }else{
-                    Toast.makeText(getActivity(),"解析内容不能为空!",Toast.LENGTH_SHORT).show();
+                String str = editText1.getText().toString();
+                if (!TextUtils.isEmpty(str)) {
+                    parser(str, isJson, false);
+                } else {
+                    Toast.makeText(getActivity(), "解析内容不能为空!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String str=editText1.getText().toString();
-                if(parserObject!=null){
-                    parser(str,isJson,true);
-                }else{
-                    Toast.makeText(getActivity(),"解析内容不能为空!",Toast.LENGTH_SHORT).show();
+                String str = editText1.getText().toString();
+                if (parserObject != null) {
+                    parser(str, isJson, true);
+                } else {
+                    Toast.makeText(getActivity(), "解析内容不能为空!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(parserObject!=null){
-                    covertString(parserObject,isJson,false);
-                }else{
-                    Toast.makeText(getActivity(),"请先解析内容!",Toast.LENGTH_SHORT).show();
+                if (parserObject != null) {
+                    covertString(parserObject, isJson, false);
+                } else {
+                    Toast.makeText(getActivity(), "请先解析内容!", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -119,10 +121,10 @@ public class ParserFragment extends Fragment {
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(parserObject!=null){
-                    covertString(parserObject,isJson,true);
-                }else{
-                    Toast.makeText(getActivity(),"请先解析内容!",Toast.LENGTH_SHORT).show();
+                if (parserObject != null) {
+                    covertString(parserObject, isJson, true);
+                } else {
+                    Toast.makeText(getActivity(), "请先解析内容!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -137,40 +139,43 @@ public class ParserFragment extends Fragment {
         textView1.setText("--------------Converter---------------\n");
         editText1.setText(jsonStr);
     }
-    private void covertString(ParserObject parserObject,boolean json,boolean annotation) {
-        Object object=null;
+
+    private void covertString(ParserObject parserObject, boolean json, boolean annotation) {
+        Object object = null;
         try {
-           object=json?JsonUtils.toJSONObject(parserObject,annotation):XmlUtils.toXml(parserObject,annotation);
+            object = json ? JsonUtils.toJSONObject(parserObject, annotation) : XmlUtils.toXml(parserObject, annotation);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        printLog(object+"\n");
+        printLog(object + "\n");
     }
-    private void parser(String str, boolean json,boolean annotation) {
+
+    private void parser(String str, boolean json, boolean annotation) {
         try {
-            ParserObject<Boolean,String> test=new ParserObject<Boolean,String>();
-            Class<ParserObject<Boolean,String>> clazz= (Class<ParserObject<Boolean,String>>) test.getClass();
+            ParserObject<Boolean, String> test = new ParserObject<Boolean, String>();
+            Class<ParserObject<Boolean, String>> clazz = (Class<ParserObject<Boolean, String>>) test.getClass();
             ParserObject tr = clazz.getDeclaredConstructor().newInstance();
-            Log.e(""+clazz.cast(tr).getT());
-            Log.e(""+clazz.cast(tr).getR());
-            Map<String,Class> typeMap=new HashMap<String,Class>();
+            Log.e("" + clazz.cast(tr).getT());
+            Log.e("" + clazz.cast(tr).getR());
+            Map<String, Class> typeMap = new HashMap<String, Class>();
 
-            for(TypeVariable type:clazz.getTypeParameters()){
-                Log.e("type:"+type.getName());
+            for (TypeVariable type : clazz.getTypeParameters()) {
+                Log.e("type:" + type.getName());
             }
-            for(Field field:clazz.getDeclaredFields()){
+            for (Field field : clazz.getDeclaredFields()) {
                 field.setAccessible(true);
-                Log.e("field:"+field.getName()+","+field.getGenericType().getClass());
+                Log.e("field:" + field.getName() + "," + field.getGenericType().getClass());
             }
 
-            parserObject=json?JsonUtils.parserToObject(clazz,str,annotation):
-                    XmlUtils.parserToObject(clazz,str,annotation);
+            parserObject = json ? JsonUtils.parserToObject(clazz, str, annotation) :
+                    XmlUtils.parserToObject(clazz, str, annotation);
 
-        }catch (Exception e) {
-            Log.e(TAG,e.getMessage());
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
         }
-        printLog(parserObject+"\n");
+        printLog(parserObject + "\n");
     }
+
     public static Class getSuperClassGenricType(Class clazz, int index) throws IndexOutOfBoundsException {
 
         Type genType = clazz.getGenericSuperclass();
@@ -189,11 +194,13 @@ public class ParserFragment extends Fragment {
         }
         return (Class) params[index];
     }
+
     private void printLog(String message) {
         textView1.setMovementMethod(ScrollingMovementMethod.getInstance());
         textView1.append(message);
         Log.d(message);
     }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -206,7 +213,8 @@ public class ParserFragment extends Fragment {
         StatAgent.getInstance().onFragmentResume(TAG);
     }
 }
-class ParserObject<T,R> {
+
+class ParserObject<T, R> {
     @Element("t")
     private T t;
     @Element("r")
@@ -217,11 +225,12 @@ class ParserObject<T,R> {
     @Element("name")
     private String name;
     @Element("defStr")
-    private String defStr="defStr";
+    private String defStr = "defStr";
     @Element("_HEIGHT")
     private double height;
     @Element("_IS_CHILD")
     private boolean isChild;
+
     public ParserObject() {
 
     }

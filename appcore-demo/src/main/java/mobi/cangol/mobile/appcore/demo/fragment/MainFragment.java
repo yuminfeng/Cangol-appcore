@@ -36,8 +36,9 @@ import mobi.cangol.mobile.stat.StatAgent;
  * Created by xuewu.wei on 2016/8/31.
  */
 public class MainFragment extends ListFragment {
-    private static final String TAG="MainFragment";
-    private static List<Class<? extends Fragment>> fragments=new ArrayList<Class<? extends Fragment>>();
+    private static final String TAG = "MainFragment";
+    private static List<Class<? extends Fragment>> fragments = new ArrayList<Class<? extends Fragment>>();
+
     static {
         fragments.add(AppServiceFragment.class);
         fragments.add(DatabaseFragment.class);
@@ -49,6 +50,7 @@ public class MainFragment extends ListFragment {
         fragments.add(UtilsFragment.class);
         fragments.add(StatFragment.class);
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,28 +59,30 @@ public class MainFragment extends ListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        List<String> listStr=new ArrayList<String>();
+        List<String> listStr = new ArrayList<String>();
         for (int i = 0; i < fragments.size(); i++) {
-            listStr.add(fragments.get(i).getSimpleName().replace("Fragment",""));
+            listStr.add(fragments.get(i).getSimpleName().replace("Fragment", ""));
         }
-        setListAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, listStr));
+        setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, listStr));
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        getActivity().setTitle((String)getListAdapter().getItem(position));
-        ((MainActivity)getActivity()).toFragment(fragments.get(position),new Bundle(),false);
+        getActivity().setTitle((String) getListAdapter().getItem(position));
+        ((MainActivity) getActivity()).toFragment(fragments.get(position), new Bundle(), false);
         getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
     @Override
     public void onStart() {
         super.onStart();
-        if(this.getFragmentManager().getBackStackEntryCount()==0){
+        if (this.getFragmentManager().getBackStackEntryCount() == 0) {
             getActivity().setTitle(R.string.app_name);
             getActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
         }
     }
+
     @Override
     public void onPause() {
         super.onPause();

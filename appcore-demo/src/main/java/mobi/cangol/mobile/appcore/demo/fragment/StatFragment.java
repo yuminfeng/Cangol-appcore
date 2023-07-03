@@ -17,7 +17,8 @@ import mobi.cangol.mobile.utils.TimeUtils;
  */
 public class StatFragment extends Fragment {
 
-    private static final String TAG="StatFragment";
+    private static final String TAG = "StatFragment";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +36,7 @@ public class StatFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         initViews();
     }
+
     private void initViews() {
         getView().findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
             @Override

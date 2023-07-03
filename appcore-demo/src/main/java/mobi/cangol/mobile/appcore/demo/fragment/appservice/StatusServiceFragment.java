@@ -31,7 +31,7 @@ public class StatusServiceFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        statusService = (StatusService) ((CoreApplication) this.getActivity().getApplicationContext()).getAppService(AppService.STATUS_SERVICE);
+        statusService = ((CoreApplication) this.getActivity().getApplicationContext()).getAppService(AppService.STATUS_SERVICE);
     }
 
     @Override
@@ -54,7 +54,8 @@ public class StatusServiceFragment extends Fragment {
     private void initViews() {
         textView1 = this.getView().findViewById(R.id.textView1);
     }
-    private void updateViews(){
+
+    private void updateViews() {
         textView1.setMovementMethod(ScrollingMovementMethod.getInstance());
         textView1.setText("isConnection:      " + statusService.isConnection());
         textView1.append("\nisWifiConnection:  " + statusService.isWifiConnection());
@@ -64,6 +65,7 @@ public class StatusServiceFragment extends Fragment {
 
         Log.d(textView1.getText().toString());
     }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -75,6 +77,7 @@ public class StatusServiceFragment extends Fragment {
         super.onResume();
         StatAgent.getInstance().onFragmentResume(TAG);
     }
+
     private void initData() {
         statusService.registerStatusListener(new StatusListener() {
             @Override

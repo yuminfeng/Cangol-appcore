@@ -48,7 +48,7 @@ public class RouteServiceFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 routeService.build("lib/test1")
-                        .putString("key","hello "+new Random().nextInt(100))
+                        .putString("key", "hello " + new Random().nextInt(100))
                         .navigation(getContext());
             }
         });
@@ -56,7 +56,7 @@ public class RouteServiceFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 routeService.build("lib/test")
-                        .putString("key","hello "+new Random().nextInt(100))
+                        .putString("key", "hello " + new Random().nextInt(100))
                         .navigation(getContext());
             }
         });
@@ -65,24 +65,24 @@ public class RouteServiceFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 routeService.build("lib/test")
-                        .putString("key","newStack "+new Random().nextInt(100))
-                        .navigation(getContext(),true);
+                        .putString("key", "newStack " + new Random().nextInt(100))
+                        .navigation(getContext(), true);
             }
         });
 
         getView().findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("appdemo://app/test?key=actionView "+new Random().nextInt(100)));
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("appdemo://app/test?key=actionView " + new Random().nextInt(100)));
                 startActivity(intent);
             }
         });
         getView().findViewById(R.id.button4).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("appdemo://lib/test?key=actionView "+new Random().nextInt(100)));
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("appdemo://lib/test?key=actionView " + new Random().nextInt(100)));
                 startActivity(intent);
             }
         });

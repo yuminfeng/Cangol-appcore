@@ -38,31 +38,33 @@ public class MainActivity extends AppCompatActivity implements OnNavigation {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
-            toFragment(MainFragment.class,null,false);
+            toFragment(MainFragment.class, null, false);
         }
         this.setActionBar(new Toolbar(this));
-        Log.d("getMD5Fingerprint="+DeviceInfo.getMD5Fingerprint(this));
-        Log.d("getSHA1Fingerprint="+DeviceInfo.getSHA1Fingerprint(this));
-        mRouteService= (RouteService) ((CoreApplication)getApplication()).getAppService(AppService.ROUTE_SERVICE);
+        Log.d("getMD5Fingerprint=" + DeviceInfo.getMD5Fingerprint(this));
+        Log.d("getSHA1Fingerprint=" + DeviceInfo.getSHA1Fingerprint(this));
+        mRouteService = ((CoreApplication) getApplication()).getAppService(AppService.ROUTE_SERVICE);
         mRouteService.registerNavigation(this);
         test();
-        ((CoreApplication)getApplication()).addActivityToManager(this);
-        Log.d("ActivityManager="+((CoreApplication)getApplication()).getActivityManager().size());
+        ((CoreApplication) getApplication()).addActivityToManager(this);
+        Log.d("ActivityManager=" + ((CoreApplication) getApplication()).getActivityManager().size());
         handleIntent(getIntent());
     }
+
     protected void handleIntent(Intent intent) {
         Uri data = intent.getData();
-        if(data!=null){
-            mRouteService.handleIntent(this,intent);
+        if (data != null) {
+            mRouteService.handleIntent(this, intent);
         }
 
     }
-    public void test(){
+
+    public void test() {
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                Log.e(TAG,Build.VERSION.SDK_INT+" test "+  new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX").parse("2019-09-19T04:00:40+00:00").toString());
-            }else{
-                Log.e(TAG,Build.VERSION.SDK_INT+ " test"+ new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse("2019-09-19T04:00:40+00:00").toString());
+                Log.e(TAG, Build.VERSION.SDK_INT + " test " + new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX").parse("2019-09-19T04:00:40+00:00").toString());
+            } else {
+                Log.e(TAG, Build.VERSION.SDK_INT + " test" + new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse("2019-09-19T04:00:40+00:00").toString());
             }
         } catch (ParseException e) {
             e.printStackTrace();
@@ -70,22 +72,24 @@ public class MainActivity extends AppCompatActivity implements OnNavigation {
             e.printStackTrace();
         }
     }
+
     @Override
     public boolean onNavigateUp() {
         FragmentManager fm = this.getSupportFragmentManager();
-        if(fm.getBackStackEntryCount()>1){
+        if (fm.getBackStackEntryCount() > 1) {
             fm.popBackStack();
-        }else{
+        } else {
             super.onBackPressed();
         }
         return true;
     }
+
     @Override
     public void onBackPressed() {
         FragmentManager fm = this.getSupportFragmentManager();
-        if(fm.getBackStackEntryCount()>1){
+        if (fm.getBackStackEntryCount() > 1) {
             super.onBackPressed();
-        }else{
+        } else {
             finish();
         }
     }
@@ -105,23 +109,23 @@ public class MainActivity extends AppCompatActivity implements OnNavigation {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ((CoreApplication)getApplication()).onExit();
+        ((CoreApplication) getApplication()).onExit();
     }
 
     @Override
     public void notFound(String path) {
-        Toast.makeText(this, path+" not found!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, path + " not found!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void toFragment(Class<? extends Fragment> fragmentClass, Bundle bundle, boolean newStack) {
         Log.i("toFragment ");
-        if(newStack){
+        if (newStack) {
             Intent intent = new Intent(this, DynamicActivity.class);
             intent.putExtra("class", fragmentClass.getName());
             intent.putExtra("args", bundle);
             startActivity(intent);
-        }else{
+        } else {
             FragmentManager fm = this.getSupportFragmentManager();
             fm.beginTransaction()
                     .replace(R.id.framelayout, Fragment.instantiate(this, fragmentClass.getName(), bundle))

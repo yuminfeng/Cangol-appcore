@@ -26,10 +26,11 @@ import mobi.cangol.mobile.utils.TimeUtils;
  */
 public class SoapFragment extends Fragment {
 
-    private static final String TAG="HttpFragment";
+    private static final String TAG = "HttpFragment";
     private SoapClient mSoapClient;
     private TextView textView1;
     private Button button1;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +48,7 @@ public class SoapFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         initViews();
     }
+
     private void initViews() {
         textView1 = this.getView().findViewById(R.id.textView1);
         button1 = this.getView().findViewById(R.id.button1);
@@ -66,50 +68,20 @@ public class SoapFragment extends Fragment {
         textView1.append(message);
         Log.d(message);
     }
-    private void request(){
-        String url="http://www.webxml.com.cn/WebServices/WeatherWebService.asmx";
-        String namespace="http://WebXml.com.cn/";
-        String action="getSupportCity";
-        HashMap<String, String> params=new HashMap<String, String>();
-        params.put("byProvinceName","河北");
-        mSoapClient.send(getActivity(),url,namespace,action,params,new SoapResponseHandler(){
-            ProgressDialog progressDialog;
-                    @Override
-                    public void onStart() {
-                        super.onStart();
-                        progressDialog=ProgressDialog.show(getActivity(),null,"loading...");
-                        printLog("onStart\n");
-                    }
 
-                    @Override
-                    public void onFailure(String error) {
-                        super.onFailure(error);
-                        progressDialog.dismiss();
-                        printLog("onFailure "+error);
-                    }
-
-                    @Override
-                    public void onSuccess(String content) {
-                        super.onSuccess(content);
-                        progressDialog.dismiss();
-                        printLog("onSuccess "+content);
-                    }
-                }
-        );
-    }
-    private void request2(){
-        String url="http://www.webxml.com.cn/WebServices/ChinaTVprogramWebService.asmx";
-        String namespace="http://WebXml.com.cn/";
-        String action="getTVprogramString";
-        HashMap<String, String> params=new HashMap<String, String>();
-        params.put("theTVchannelID","606");
-        params.put("theDate", TimeUtils.getCurrentDate());
-        mSoapClient.send(getActivity(),url,namespace,action,params,new SoapResponseHandler(){
+    private void request() {
+        String url = "http://www.webxml.com.cn/WebServices/WeatherWebService.asmx";
+        String namespace = "http://WebXml.com.cn/";
+        String action = "getSupportCity";
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("byProvinceName", "河北");
+        mSoapClient.send(getActivity(), url, namespace, action, params, new SoapResponseHandler() {
                     ProgressDialog progressDialog;
+
                     @Override
                     public void onStart() {
                         super.onStart();
-                        progressDialog=ProgressDialog.show(getActivity(),null,"loading...");
+                        progressDialog = ProgressDialog.show(getActivity(), null, "loading...");
                         printLog("onStart\n");
                     }
 
@@ -117,18 +89,53 @@ public class SoapFragment extends Fragment {
                     public void onFailure(String error) {
                         super.onFailure(error);
                         progressDialog.dismiss();
-                        printLog("onFailure "+error);
+                        printLog("onFailure " + error);
                     }
 
                     @Override
                     public void onSuccess(String content) {
                         super.onSuccess(content);
                         progressDialog.dismiss();
-                        printLog("onSuccess "+content);
+                        printLog("onSuccess " + content);
                     }
                 }
         );
     }
+
+    private void request2() {
+        String url = "http://www.webxml.com.cn/WebServices/ChinaTVprogramWebService.asmx";
+        String namespace = "http://WebXml.com.cn/";
+        String action = "getTVprogramString";
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("theTVchannelID", "606");
+        params.put("theDate", TimeUtils.getCurrentDate());
+        mSoapClient.send(getActivity(), url, namespace, action, params, new SoapResponseHandler() {
+                    ProgressDialog progressDialog;
+
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+                        progressDialog = ProgressDialog.show(getActivity(), null, "loading...");
+                        printLog("onStart\n");
+                    }
+
+                    @Override
+                    public void onFailure(String error) {
+                        super.onFailure(error);
+                        progressDialog.dismiss();
+                        printLog("onFailure " + error);
+                    }
+
+                    @Override
+                    public void onSuccess(String content) {
+                        super.onSuccess(content);
+                        progressDialog.dismiss();
+                        printLog("onSuccess " + content);
+                    }
+                }
+        );
+    }
+
     @Override
     public void onPause() {
         super.onPause();

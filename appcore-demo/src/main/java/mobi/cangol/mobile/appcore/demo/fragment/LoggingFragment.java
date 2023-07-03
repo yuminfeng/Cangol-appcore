@@ -20,7 +20,7 @@ import mobi.cangol.mobile.stat.StatAgent;
 public class LoggingFragment extends Fragment {
     private static final String TAG = "LoggingFragment";
     private TextView textView1;
-    private Button button1,button2;
+    private Button button1, button2;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,19 +45,20 @@ public class LoggingFragment extends Fragment {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.setLogLevelFormat(android.util.Log.VERBOSE,false);
-                Log.d(TAG,"test logging");
+                Log.setLogLevelFormat(android.util.Log.VERBOSE, false);
+                Log.d(TAG, "test logging");
             }
         });
         button2 = this.getView().findViewById(R.id.button2);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.setLogLevelFormat(android.util.Log.WARN,true);
-                Log.d(TAG,"test logging");
+                Log.setLogLevelFormat(android.util.Log.WARN, true);
+                Log.d(TAG, "test logging");
             }
         });
     }
+
     @Override
     public void onPause() {
         super.onPause();

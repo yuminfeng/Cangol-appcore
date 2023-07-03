@@ -25,11 +25,11 @@ import mobi.cangol.mobile.stat.StatAgent;
 /**
  * Created by weixuewu on 16/4/30.
  */
-public class CacheManagerFragment extends Fragment{
+public class CacheManagerFragment extends Fragment {
     private static final String TAG = "CacheManagerFragment";
     private CacheManager cacheManager;
     private TextView textView1;
-    private Button button1, button2,button3,button4,button5;
+    private Button button1, button2, button3, button4, button5;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,11 +42,13 @@ public class CacheManagerFragment extends Fragment{
         View v = inflater.inflate(R.layout.fragment_manager_cache, container, false);
         return v;
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initViews();
     }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -58,7 +60,8 @@ public class CacheManagerFragment extends Fragment{
         super.onResume();
         StatAgent.getInstance().onFragmentResume(TAG);
     }
-    private void initViews(){
+
+    private void initViews() {
         textView1 = this.getView().findViewById(R.id.textView1);
         button1 = this.getView().findViewById(R.id.button1);
         button2 = this.getView().findViewById(R.id.button2);
@@ -68,23 +71,23 @@ public class CacheManagerFragment extends Fragment{
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User user=new User(1,"Jick","12");
-                cacheManager.addContent(TAG,"user",user, CacheObject.TIME_MIN*1);
+                User user = new User(1, "Jick", "12");
+                cacheManager.addContent(TAG, "user", user, CacheObject.TIME_MIN * 1);
                 updateViews();
             }
         });
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User user=new User(2,"Rose.Any","24");
-                cacheManager.addContent(TAG,"user",user);
+                User user = new User(2, "Rose.Any", "24");
+                cacheManager.addContent(TAG, "user", user);
                 updateViews();
             }
         });
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cacheManager.removeContent(TAG,"user");
+                cacheManager.removeContent(TAG, "user");
                 updateViews();
             }
         });
@@ -117,22 +120,26 @@ public class CacheManagerFragment extends Fragment{
             }
         });
     }
+
     private void updateViews() {
         textView1.setMovementMethod(ScrollingMovementMethod.getInstance());
         textView1.setText("--------------cache---------------");
         textView1.append("\nsize=" + cacheManager.size());
-        textView1.append("\nuser=" + cacheManager.getContent(TAG,"user"));
+        textView1.append("\nuser=" + cacheManager.getContent(TAG, "user"));
 
         Log.d(textView1.getText().toString());
     }
 }
-class User implements Serializable{
+
+class User implements Serializable {
     private String name;
     private String age;
     private int id;
-    public User(){}
 
-    public User(int id,String name,  String age) {
+    public User() {
+    }
+
+    public User(int id, String name, String age) {
         this.age = age;
         this.id = id;
         this.name = name;
@@ -165,7 +172,7 @@ class User implements Serializable{
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id  +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", age='" + age + '\'' +
                 '}';

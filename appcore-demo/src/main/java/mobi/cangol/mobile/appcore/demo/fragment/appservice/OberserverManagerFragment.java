@@ -40,12 +40,13 @@ import mobi.cangol.mobile.stat.StatAgent;
 /**
  * Created by weixuewu on 16/4/30.
  */
-public class OberserverManagerFragment extends Fragment{
+public class OberserverManagerFragment extends Fragment {
     private static final String TAG = "OberserverManagerFragment";
     private ObserverManager observerManager;
     private TextView textView1;
     private Button button1, button2;
     private Toast toast;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,12 +58,14 @@ public class OberserverManagerFragment extends Fragment{
         View v = inflater.inflate(R.layout.fragment_service_oberserver, container, false);
         return v;
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initViews();
     }
-    private void initViews(){
+
+    private void initViews() {
         textView1 = this.getView().findViewById(R.id.textView1);
         button1 = this.getView().findViewById(R.id.button1);
         button2 = this.getView().findViewById(R.id.button2);
@@ -71,33 +74,37 @@ public class OberserverManagerFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 updateViews("Click button1 ");
-                observerManager.post("button1Click",null);
+                observerManager.post("button1Click", null);
             }
         });
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateViews("Click button2 ");
-                observerManager.post("button2Click","hello world");
+                observerManager.post("button2Click", "hello world");
             }
         });
         textView1.setMovementMethod(ScrollingMovementMethod.getInstance());
         textView1.setText("--------------ObserverManager---------------");
         observerManager.register(this);
     }
+
     @Subscribe("button1Click")
-    public void onEvent1(String msg){
-        updateViews("onEvent1 "+msg);
+    public void onEvent1(String msg) {
+        updateViews("onEvent1 " + msg);
     }
+
     @Subscribe("button2Click")
-    public void onEvent2(String msg){
-        updateViews("onEvent2 "+msg);
+    public void onEvent2(String msg) {
+        updateViews("onEvent2 " + msg);
     }
-    private void updateViews(String message){
+
+    private void updateViews(String message) {
         textView1.setMovementMethod(ScrollingMovementMethod.getInstance());
-        textView1.append("\n"+message);
+        textView1.append("\n" + message);
         Log.d(message);
     }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -109,6 +116,7 @@ public class OberserverManagerFragment extends Fragment{
         super.onResume();
         StatAgent.getInstance().onFragmentResume(TAG);
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
