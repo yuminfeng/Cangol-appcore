@@ -183,9 +183,9 @@ public class CoreApplication extends Application {
      * @param name
      * @return
      */
-    public final  <T extends AppService> T getAppService(String name) {
+    public final <T extends AppService> T getAppService(String name) {
         if (mAppServiceManager != null) {
-            return (T)mAppServiceManager.getAppService(name);
+            return (T) mAppServiceManager.getAppService(name);
         }
         return null;
     }
@@ -240,34 +240,35 @@ public class CoreApplication extends Application {
      */
     public SoftReference<Activity> getTopActivity() {
         List<SoftReference<Activity>> activityManager = getActivityManager();
-        if (null == activityManager || activityManager.size() <= 0) {
+        if (activityManager.size() <= 0) {
             return null;
         }
         return activityManager.get(activityManager.size() - 1);
     }
+
     /**
      * 添加一个activity到管理列表里
      *
      * @param activity
      */
-    public final  void addActivityToManager(Activity activity) {
-        boolean contain=false;
+    public final void addActivityToManager(Activity activity) {
+        boolean contain = false;
         for (final SoftReference<Activity> activityReference : getActivityManager()) {
             if (activityReference != null && activity.equals(activityReference.get())) {
-                contain=true;
+                contain = true;
             }
         }
-        if(!contain)
-            getActivityManager().add(new SoftReference<Activity>(activity));
+        if (!contain)
+            getActivityManager().add(new SoftReference<>(activity));
     }
 
     /**
      * 关闭所有activity
      */
     public final void closeAllActivities() {
-        List<SoftReference<Activity>> list=getActivityManager();
-        for (int i = list.size()-1; i >=0; i--) {
-            SoftReference<Activity> activityReference=list.get(i);
+        List<SoftReference<Activity>> list = getActivityManager();
+        for (int i = list.size() - 1; i >= 0; i--) {
+            SoftReference<Activity> activityReference = list.get(i);
             if (activityReference != null && activityReference.get() != null) {
                 activityReference.get().finish();
             }
@@ -280,11 +281,11 @@ public class CoreApplication extends Application {
      *
      * @param activity
      */
-    public  final void delActivityFromManager(Activity activity) {
+    public final void delActivityFromManager(Activity activity) {
         Iterator<SoftReference<Activity>> iterator = getActivityManager().iterator();
         while (iterator.hasNext()) {
             SoftReference<Activity> reference = iterator.next();
-            if (reference!=null&reference.get()!=null&reference.get().equals(activity)) {
+            if (reference != null & reference.get() != null & reference.get().equals(activity)) {
                 iterator.remove();
             }
         }
@@ -306,7 +307,7 @@ public class CoreApplication extends Application {
      * @return
      */
     public final SessionService getSession() {
-        return (SessionService) getAppService(AppService.SESSION_SERVICE);
+        return getAppService(AppService.SESSION_SERVICE);
     }
 
     /**
