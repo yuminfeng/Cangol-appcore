@@ -49,16 +49,10 @@ public class CoreApplication extends Application {
     private boolean mAsyncInit = false;
     private AppServiceManager mAppServiceManager;
     private PoolManager.Pool mSharePool;
-    private final ModuleManager mModuleManager;
     public final List<SoftReference<Activity>> mActivityManager = new ArrayList<>();
 
     public CoreApplication() {
         super();
-        mModuleManager = new ModuleManager(this);
-    }
-
-    public ModuleManager getModuleManager() {
-        return mModuleManager;
     }
 
     @Override
@@ -76,21 +70,17 @@ public class CoreApplication extends Application {
             }
             mSharePool = PoolManager.getPool("share");
             initAppServiceManager();
-            mModuleManager.onCreate();
             if (mAsyncInit) {
                 post(new Runnable() {
                     @Override
                     public void run() {
                         init();
-                        mModuleManager.init();
                     }
                 });
             } else {
                 init();
-                mModuleManager.init();
             }
         } else {
-            mModuleManager.onCreate();
             Log.i("cur process is not app' process");
         }
     }
@@ -98,19 +88,16 @@ public class CoreApplication extends Application {
     @Override
     public void onTerminate() {
         super.onTerminate();
-        mModuleManager.onTerminate();
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        mModuleManager.onLowMemory();
     }
 
     @Override
     public void onTrimMemory(int level) {
         super.onTrimMemory(level);
-        mModuleManager.onTrimMemory(level);
     }
 
     /**
@@ -326,7 +313,6 @@ public class CoreApplication extends Application {
      * 退出应用
      */
     public void onExit() {
-        mModuleManager.onExit();
         getSession().saveString(Constants.KEY_EXIT_CODE, "0");
         getSession().saveString(Constants.KEY_EXIT_VERSION, DeviceInfo.getAppVersion(this));
         if (mAppServiceManager != null) {
