@@ -49,7 +49,7 @@ public class CoreApplication extends Application {
     private boolean mAsyncInit = false;
     private AppServiceManager mAppServiceManager;
     private PoolManager.Pool mSharePool;
-    private ModuleManager mModuleManager;
+    private final ModuleManager mModuleManager;
     public final List<SoftReference<Activity>> mActivityManager = new ArrayList<>();
 
     public CoreApplication() {
@@ -65,7 +65,7 @@ public class CoreApplication extends Application {
     public void onCreate() {
         super.onCreate();
         if (DeviceInfo.isAppProcessByFile(this)) {
-            if (mStrictMode && Build.VERSION.SDK_INT >= 14) {
+            if (mStrictMode) {
                 StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
                 StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyLog().build());
             }
