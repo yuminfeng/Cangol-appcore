@@ -26,7 +26,6 @@ import mobi.cangol.mobile.db.DatabaseTable;
 import mobi.cangol.mobile.db.DatabaseUtils;
 import mobi.cangol.mobile.db.QueryBuilder;
 import mobi.cangol.mobile.logging.Log;
-import mobi.cangol.mobile.stat.StatAgent;
 
 /**
  * Created by weixuewu on 16/4/30.
@@ -143,13 +142,11 @@ public class DatabaseFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        StatAgent.getInstance().onFragmentPause(TAG);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        StatAgent.getInstance().onFragmentResume(TAG);
     }
 }
 

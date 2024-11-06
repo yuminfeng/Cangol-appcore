@@ -23,7 +23,6 @@ import mobi.cangol.mobile.logging.Log;
 import mobi.cangol.mobile.security.AESUtils;
 import mobi.cangol.mobile.security.Base64;
 import mobi.cangol.mobile.security.RSAUtils;
-import mobi.cangol.mobile.stat.StatAgent;
 
 /**
  * Created by weixuewu on 16/4/30.
@@ -225,13 +224,11 @@ public class SecurityFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        StatAgent.getInstance().onFragmentPause(TAG);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        StatAgent.getInstance().onFragmentResume(TAG);
     }
 
 }

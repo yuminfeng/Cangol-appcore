@@ -20,7 +20,6 @@ import mobi.cangol.mobile.logging.Log;
 import mobi.cangol.mobile.service.AppService;
 import mobi.cangol.mobile.service.route.OnNavigation;
 import mobi.cangol.mobile.service.route.RouteService;
-import mobi.cangol.mobile.stat.StatAgent;
 import mobi.cangol.mobile.utils.DeviceInfo;
 
 public class MainActivity extends AppCompatActivity implements OnNavigation {
@@ -97,13 +96,11 @@ public class MainActivity extends AppCompatActivity implements OnNavigation {
     @Override
     protected void onPause() {
         super.onPause();
-        StatAgent.getInstance().onActivityPause(TAG);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        StatAgent.getInstance().onFragmentPause(TAG);
     }
 
     @Override

@@ -14,7 +14,6 @@ import mobi.cangol.mobile.appcore.demo.R;
 import mobi.cangol.mobile.logging.Log;
 import mobi.cangol.mobile.service.AppService;
 import mobi.cangol.mobile.service.route.RouteService;
-import mobi.cangol.mobile.stat.StatAgent;
 
 
 public class DynamicActivity extends AppCompatActivity {
@@ -41,13 +40,11 @@ public class DynamicActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        StatAgent.getInstance().onActivityPause(TAG);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        StatAgent.getInstance().onFragmentPause(TAG);
     }
 
     protected void handleIntent(Intent intent) {

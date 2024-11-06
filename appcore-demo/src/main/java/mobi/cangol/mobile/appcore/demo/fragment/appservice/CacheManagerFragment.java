@@ -20,7 +20,6 @@ import mobi.cangol.mobile.service.AppService;
 import mobi.cangol.mobile.service.cache.CacheLoader;
 import mobi.cangol.mobile.service.cache.CacheManager;
 import mobi.cangol.mobile.service.cache.CacheObject;
-import mobi.cangol.mobile.stat.StatAgent;
 
 /**
  * Created by weixuewu on 16/4/30.
@@ -52,13 +51,11 @@ public class CacheManagerFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        StatAgent.getInstance().onFragmentPause(TAG);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        StatAgent.getInstance().onFragmentResume(TAG);
     }
 
     private void initViews() {

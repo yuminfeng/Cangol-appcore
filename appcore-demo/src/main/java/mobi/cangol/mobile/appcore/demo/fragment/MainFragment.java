@@ -30,7 +30,6 @@ import java.util.List;
 
 import mobi.cangol.mobile.appcore.demo.R;
 import mobi.cangol.mobile.appcore.demo.activity.MainActivity;
-import mobi.cangol.mobile.stat.StatAgent;
 
 /**
  * Created by xuewu.wei on 2016/8/31.
@@ -48,7 +47,6 @@ public class MainFragment extends ListFragment {
         fragments.add(SecurityFragment.class);
         fragments.add(SoapFragment.class);
         fragments.add(UtilsFragment.class);
-        fragments.add(StatFragment.class);
     }
 
     @Override
@@ -86,12 +84,10 @@ public class MainFragment extends ListFragment {
     @Override
     public void onPause() {
         super.onPause();
-        StatAgent.getInstance().onFragmentPause(TAG);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        StatAgent.getInstance().onFragmentResume(TAG);
     }
 }

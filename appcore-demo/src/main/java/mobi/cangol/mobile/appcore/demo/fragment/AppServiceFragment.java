@@ -22,7 +22,6 @@ import mobi.cangol.mobile.appcore.demo.fragment.appservice.RouteServiceFragment;
 import mobi.cangol.mobile.appcore.demo.fragment.appservice.SessionServiceFragment;
 import mobi.cangol.mobile.appcore.demo.fragment.appservice.StatusServiceFragment;
 import mobi.cangol.mobile.appcore.demo.fragment.appservice.UpgradeServiceFragment;
-import mobi.cangol.mobile.stat.StatAgent;
 
 /**
  * Created by weixuewu on 16/4/30.
@@ -81,12 +80,10 @@ public class AppServiceFragment extends ListFragment {
     @Override
     public void onPause() {
         super.onPause();
-        StatAgent.getInstance().onFragmentPause(TAG);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        StatAgent.getInstance().onFragmentResume(TAG);
     }
 }

@@ -3,7 +3,6 @@ package mobi.cangol.mobile.appcore.demo;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import mobi.cangol.mobile.CoreApplication;
-import mobi.cangol.mobile.stat.StatAgent;
 import mobi.cangol.mobile.utils.DeviceInfo;
 
 /**
@@ -24,7 +23,6 @@ public class MobileApplication extends CoreApplication {
     @Override
     public void init() {
         if (DeviceInfo.isAppProcessByFile(this)) {
-            StatAgent.initInstance(this);
         }
     }
 //    private void registerRoute() {

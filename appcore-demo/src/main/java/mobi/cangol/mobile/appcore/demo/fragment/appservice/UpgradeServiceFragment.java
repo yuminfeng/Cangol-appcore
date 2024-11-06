@@ -14,7 +14,6 @@ import mobi.cangol.mobile.appcore.demo.R;
 import mobi.cangol.mobile.service.AppService;
 import mobi.cangol.mobile.service.upgrade.OnUpgradeListener;
 import mobi.cangol.mobile.service.upgrade.UpgradeService;
-import mobi.cangol.mobile.stat.StatAgent;
 
 /**
  * Created by weixuewu on 16/4/30.
@@ -85,12 +84,10 @@ public class UpgradeServiceFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        StatAgent.getInstance().onFragmentPause(TAG);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        StatAgent.getInstance().onFragmentResume(TAG);
     }
 }

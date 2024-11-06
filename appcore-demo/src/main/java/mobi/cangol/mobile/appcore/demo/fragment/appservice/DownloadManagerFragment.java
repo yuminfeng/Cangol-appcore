@@ -73,13 +73,11 @@ public class DownloadManagerFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        //StatAgent.getInstance().onFragmentPause(TAG);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        //StatAgent.getInstance().onFragmentResume(TAG);
     }
 
     private void initViews() {

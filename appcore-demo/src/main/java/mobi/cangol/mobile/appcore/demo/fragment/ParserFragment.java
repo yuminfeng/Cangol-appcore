@@ -27,7 +27,6 @@ import mobi.cangol.mobile.logging.Log;
 import mobi.cangol.mobile.parser.Element;
 import mobi.cangol.mobile.parser.JsonUtils;
 import mobi.cangol.mobile.parser.XmlUtils;
-import mobi.cangol.mobile.stat.StatAgent;
 
 /**
  * Created by weixuewu on 16/4/30.
@@ -204,13 +203,11 @@ public class ParserFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        StatAgent.getInstance().onFragmentPause(TAG);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        StatAgent.getInstance().onFragmentResume(TAG);
     }
 }
 

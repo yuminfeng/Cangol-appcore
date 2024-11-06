@@ -18,7 +18,6 @@ import mobi.cangol.mobile.appcore.demo.R;
 import mobi.cangol.mobile.logging.Log;
 import mobi.cangol.mobile.soap.SoapClient;
 import mobi.cangol.mobile.soap.SoapResponseHandler;
-import mobi.cangol.mobile.stat.StatAgent;
 import mobi.cangol.mobile.utils.TimeUtils;
 
 /**
@@ -139,12 +138,10 @@ public class SoapFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        StatAgent.getInstance().onFragmentPause(TAG);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        StatAgent.getInstance().onFragmentResume(TAG);
     }
 }
