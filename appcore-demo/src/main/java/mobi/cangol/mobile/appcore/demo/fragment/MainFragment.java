@@ -45,7 +45,6 @@ public class MainFragment extends ListFragment {
         fragments.add(LoggingFragment.class);
         fragments.add(ParserFragment.class);
         fragments.add(SecurityFragment.class);
-        fragments.add(SoapFragment.class);
         fragments.add(UtilsFragment.class);
     }
 
