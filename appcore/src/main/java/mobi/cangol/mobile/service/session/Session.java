@@ -19,6 +19,8 @@ import mobi.cangol.mobile.CoreApplication;
 import mobi.cangol.mobile.logging.Log;
 import mobi.cangol.mobile.service.AppService;
 import mobi.cangol.mobile.service.conf.ConfigService;
+import mobi.cangol.mobile.store.MMKVHelper;
+import mobi.cangol.mobile.store.SharedStore;
 import mobi.cangol.mobile.utils.FileUtils;
 import mobi.cangol.mobile.utils.Object2FileUtils;
 import mobi.cangol.mobile.utils.StringUtils;
@@ -40,8 +42,12 @@ public class Session {
     public Session(Context context, String name) {
         mName = name;
         mCoreApplication = (CoreApplication) context;
-        mSharedPreferences = context.getSharedPreferences("session_" + name, Context.MODE_MULTI_PROCESS);
-        final ConfigService configService = (ConfigService) mCoreApplication.getAppService(AppService.CONFIG_SERVICE);
+        // 初始化mmkv
+        String spName = "session_" + name;
+        SharedStore sharedStore = MMKVHelper.with(context, spName);
+        sharedStore.migrate(context, spName, Context.MODE_MULTI_PROCESS);
+        mSharedPreferences = sharedStore;
+        final ConfigService configService = mCoreApplication.getAppService(AppService.CONFIG_SERVICE);
         mSessionDir = configService.getCacheDir().getAbsolutePath() + File.separator + "session_" + name;
 
         final StrictMode.ThreadPolicy oldPolicy = StrictMode.allowThreadDiskReads();
@@ -58,7 +64,7 @@ public class Session {
     }
 
     public boolean containsKey(String key) {
-        return mMap.containsKey(key);
+        return mSharedPreferences.contains(key) || mMap.containsKey(key);
     }
 
 
@@ -67,6 +73,9 @@ public class Session {
     }
 
     public int getInt(String key, int defValue) {
+        if (mSharedPreferences.contains(key)) {
+            return mSharedPreferences.getInt(key, defValue);
+        }
         if (mMap.containsKey(key)) {
             return (int) mMap.get(key);
         }
@@ -74,6 +83,9 @@ public class Session {
     }
 
     public boolean getBoolean(String key, boolean defValue) {
+        if (mSharedPreferences.contains(key)) {
+            return mSharedPreferences.getBoolean(key, defValue);
+        }
         if (mMap.containsKey(key)) {
             return (boolean) mMap.get(key);
         }
@@ -81,6 +93,9 @@ public class Session {
     }
 
     public long getLong(String key, long defValue) {
+        if (mSharedPreferences.contains(key)) {
+            return mSharedPreferences.getLong(key, defValue);
+        }
         if (mMap.containsKey(key)) {
             return (long) mMap.get(key);
         }
@@ -88,6 +103,9 @@ public class Session {
     }
 
     public float getFloat(String key, float defValue) {
+        if (mSharedPreferences.contains(key)) {
+            return mSharedPreferences.getFloat(key, defValue);
+        }
         if (mMap.containsKey(key)) {
             return (float) mMap.get(key);
         }
@@ -95,6 +113,9 @@ public class Session {
     }
 
     public String getString(String key, String defValue) {
+        if (mSharedPreferences.contains(key)) {
+            return mSharedPreferences.getString(key, defValue);
+        }
         if (mMap.containsKey(key)) {
             return (String) mMap.get(key);
         }
@@ -102,6 +123,9 @@ public class Session {
     }
 
     public Set<String> getStringSet(String key, Set<String> defValue) {
+        if (mSharedPreferences.contains(key)) {
+            return mSharedPreferences.getStringSet(key, defValue);
+        }
         if (mMap.containsKey(key)) {
             return (Set<String>) mMap.get(key);
         }
@@ -200,11 +224,11 @@ public class Session {
     }
 
     public void saveAll(Map<String, ?> map) {
-        for (Map.Entry<String,?> entry: map.entrySet()) {
+        for (Map.Entry<String, ?> entry : map.entrySet()) {
             if (entry.getValue() instanceof Float) {
                 saveFloat(entry.getKey(), (Float) entry.getValue());
             } else if (entry.getValue() instanceof Boolean) {
-                saveBoolean(entry.getKey(), (Boolean)entry.getValue());
+                saveBoolean(entry.getKey(), (Boolean) entry.getValue());
             } else if (entry.getValue() instanceof String) {
                 saveString(entry.getKey(), (String) entry.getValue());
             } else if (entry.getValue() instanceof Integer) {
@@ -218,7 +242,7 @@ public class Session {
             } else if (entry.getValue() instanceof JSONArray) {
                 saveJSONArray(entry.getKey(), (JSONArray) entry.getValue());
             } else if (Serializable.class.isAssignableFrom(entry.getValue().getClass())) {
-                saveSerializable(entry.getKey(), (Serializable)entry.getValue());
+                saveSerializable(entry.getKey(), (Serializable) entry.getValue());
             } else {
                 //其他缓存方案
                 throw new IllegalArgumentException(entry.getValue().getClass() + " is not cache type");
@@ -271,9 +295,9 @@ public class Session {
 
     public void refresh() {
         final StrictMode.ThreadPolicy oldPolicy = StrictMode.allowThreadDiskReads();
-        final Map<String, ?> map = getShared().getAll();
+//        final Map<String, ?> map = getShared().getAll();
         StrictMode.setThreadPolicy(oldPolicy);
-        mMap.putAll(map);
+//        mMap.putAll(map);
         mCoreApplication.post(new Runnable() {
             @Override
             public void run() {
@@ -284,7 +308,7 @@ public class Session {
 
     private Map<String, Object> loadDiskMap() {
         Log.d(TAG + mName, "scan cache file");
-        final  List<File> files = FileUtils.searchBySuffix(new File(mSessionDir), null, JSON, JSONA, SER);
+        final List<File> files = FileUtils.searchBySuffix(new File(mSessionDir), null, JSON, JSONA, SER);
         Log.d(TAG + mName, "cache file=" + files);
         final Map<String, Object> map = new ConcurrentHashMap<>();
         for (final File file : files) {

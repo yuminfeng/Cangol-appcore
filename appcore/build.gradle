@@ -9,6 +9,7 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.squareup.okhttp3:okhttp:3.12.12'
     implementation 'com.squareup.okio:okio:2.2.2'
+    implementation 'com.tencent:mmkv:2.0.0'
 }
 
 android {
