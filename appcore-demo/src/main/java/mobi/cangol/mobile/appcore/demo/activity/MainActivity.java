@@ -20,6 +20,7 @@ import mobi.cangol.mobile.logging.Log;
 import mobi.cangol.mobile.service.AppService;
 import mobi.cangol.mobile.service.route.OnNavigation;
 import mobi.cangol.mobile.service.route.RouteService;
+import mobi.cangol.mobile.utils.AppUtils;
 import mobi.cangol.mobile.utils.DeviceInfo;
 
 public class MainActivity extends AppCompatActivity implements OnNavigation {
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements OnNavigation {
         this.setActionBar(new Toolbar(this));
         Log.d("getMD5Fingerprint=" + DeviceInfo.getMD5Fingerprint(this));
         Log.d("getSHA1Fingerprint=" + DeviceInfo.getSHA1Fingerprint(this));
+        Log.d("all apps =" + AppUtils.getAllApps(this));
+        Log.d("app name =" + AppUtils.getAppName(this));
         mRouteService = ((CoreApplication) getApplication()).getAppService(AppService.ROUTE_SERVICE);
         mRouteService.registerNavigation(this);
         test();

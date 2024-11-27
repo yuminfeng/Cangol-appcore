@@ -749,26 +749,6 @@ public final class DeviceInfo {
         return null;
     }
 
-//    /**
-//     * return activity is foreground
-//     *
-//     * @param activityName
-//     * @param context
-//     * @return
-//     */
-//    public static boolean isForegroundActivity(String activityName, Context context) {
-//        if (context == null || TextUtils.isEmpty(activityName)) {
-//            return false;
-//        }
-//        final ActivityManager am = (ActivityManager) context.getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
-//        final List<ActivityManager.RunningTaskInfo> list = am.getRunningTasks(1);
-//        if (list != null && !list.isEmpty()) {
-//            final ComponentName cpn = list.get(0).topActivity;
-//            return activityName.equals(cpn.getClassName());
-//        }
-//        return false;
-//    }
-
     /**
      * return applcation is foreground
      *

@@ -15,6 +15,9 @@
  */
 package mobi.cangol.mobile.utils;
 
+import static android.content.Context.ACTIVITY_SERVICE;
+
+import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +28,7 @@ import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.DisplayMetrics;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +45,7 @@ public class AppUtils {
      * @param locale
      */
     public static void changeLocale(Context context, Locale locale) {
-       final Configuration config = context.getResources().getConfiguration();
+        final Configuration config = context.getResources().getConfiguration();
         final DisplayMetrics dm = context.getResources().getDisplayMetrics();
         config.locale = locale;
         context.getResources().updateConfiguration(config, dm);
@@ -58,7 +62,7 @@ public class AppUtils {
      * @param apkUri
      */
     public static void install(Context context, Uri apkUri) {
-       final Intent intent = new Intent(Intent.ACTION_VIEW);
+        final Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intent.setDataAndType(apkUri,
@@ -185,12 +189,32 @@ public class AppUtils {
         final PackageManager pManager = context.getPackageManager();
         final List<PackageInfo> pkgList = pManager.getInstalledPackages(0);
         for (int i = 0; i < pkgList.size(); i++) {
-           final PackageInfo pak = pkgList.get(i);
+            final PackageInfo pak = pkgList.get(i);
             //not system app
             if ((pak.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) <= 0) {
                 apps.add(pak);
             }
         }
         return apps;
+    }
+
+    public static String getAppName(Context context) {
+        String processName;
+        ActivityManager am = (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
+        if (am == null) {
+            return null;
+        }
+        List<ActivityManager.RunningAppProcessInfo> list = am.getRunningAppProcesses();
+        for (ActivityManager.RunningAppProcessInfo info : list) {
+            try {
+                if (info.pid == android.os.Process.myPid()) {
+                    processName = info.processName;
+                    return processName;
+                }
+            } catch (Exception e) {
+                Log.e("Process", "Error>> " + e.getMessage(), e);
+            }
+        }
+        return null;
     }
 }
