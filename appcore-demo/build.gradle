@@ -13,7 +13,7 @@ dependencies {
 
 android {
 
-    compileSdkVersion Integer.decode("$sdk_version")
+    compileSdk Integer.decode("$sdk_version")
 
     defaultConfig {
         minSdkVersion Integer.decode("$min_version")
@@ -22,6 +22,7 @@ android {
         versionName "${POM_VERSION}"
         multiDexEnabled true
     }
+
     lintOptions {
         abortOnError false
     }
