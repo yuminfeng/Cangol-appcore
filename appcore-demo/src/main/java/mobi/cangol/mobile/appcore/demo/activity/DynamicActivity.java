@@ -1,7 +1,6 @@
 package mobi.cangol.mobile.appcore.demo.activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Toolbar;
 
@@ -12,8 +11,6 @@ import androidx.fragment.app.FragmentManager;
 import mobi.cangol.mobile.CoreApplication;
 import mobi.cangol.mobile.appcore.demo.R;
 import mobi.cangol.mobile.logging.Log;
-import mobi.cangol.mobile.service.AppService;
-import mobi.cangol.mobile.service.route.RouteService;
 
 
 public class DynamicActivity extends AppCompatActivity {

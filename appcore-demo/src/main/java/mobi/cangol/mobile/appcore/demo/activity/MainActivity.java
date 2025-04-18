@@ -3,7 +3,6 @@ package mobi.cangol.mobile.appcore.demo.activity;
 
 import android.content.Intent;
 import android.net.ParseException;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
