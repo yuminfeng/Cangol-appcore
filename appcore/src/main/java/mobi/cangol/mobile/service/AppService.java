@@ -51,11 +51,6 @@ public interface AppService {
      */
     String OBSERVER_MANAGER = "ObserverManager";
     /**
-     *
-     */
-    String ROUTE_SERVICE = "RouteService";
-
-    /**
      * 当创建时
      *
      * @param context

@@ -18,7 +18,6 @@ import mobi.cangol.mobile.appcore.demo.fragment.appservice.ConfigServiceFragment
 import mobi.cangol.mobile.appcore.demo.fragment.appservice.CrashServiceFragment;
 import mobi.cangol.mobile.appcore.demo.fragment.appservice.DownloadManagerFragment;
 import mobi.cangol.mobile.appcore.demo.fragment.appservice.OberserverManagerFragment;
-import mobi.cangol.mobile.appcore.demo.fragment.appservice.RouteServiceFragment;
 import mobi.cangol.mobile.appcore.demo.fragment.appservice.SessionServiceFragment;
 import mobi.cangol.mobile.appcore.demo.fragment.appservice.StatusServiceFragment;
 import mobi.cangol.mobile.appcore.demo.fragment.appservice.UpgradeServiceFragment;
@@ -40,7 +39,6 @@ public class AppServiceFragment extends ListFragment {
         list.add(UpgradeServiceFragment.class);
         list.add(DownloadManagerFragment.class);
         list.add(OberserverManagerFragment.class);
-        list.add(RouteServiceFragment.class);
     }
 
     @Override

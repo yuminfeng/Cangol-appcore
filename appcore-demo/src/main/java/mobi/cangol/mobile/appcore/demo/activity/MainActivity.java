@@ -17,15 +17,12 @@ import mobi.cangol.mobile.CoreApplication;
 import mobi.cangol.mobile.appcore.demo.R;
 import mobi.cangol.mobile.appcore.demo.fragment.MainFragment;
 import mobi.cangol.mobile.logging.Log;
-import mobi.cangol.mobile.service.AppService;
 import mobi.cangol.mobile.service.route.OnNavigation;
-import mobi.cangol.mobile.service.route.RouteService;
 import mobi.cangol.mobile.utils.AppUtils;
 import mobi.cangol.mobile.utils.DeviceInfo;
 
 public class MainActivity extends AppCompatActivity implements OnNavigation {
     private static final String TAG = "MainActivity";
-    private RouteService mRouteService;
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -45,8 +42,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigation {
         Log.d("getSHA1Fingerprint=" + DeviceInfo.getSHA1Fingerprint(this));
         Log.d("all apps =" + AppUtils.getAllApps(this));
         Log.d("app name =" + AppUtils.getAppName(this));
-        mRouteService = ((CoreApplication) getApplication()).getAppService(AppService.ROUTE_SERVICE);
-        mRouteService.registerNavigation(this);
         test();
         ((CoreApplication) getApplication()).addActivityToManager(this);
         Log.d("ActivityManager=" + ((CoreApplication) getApplication()).getActivityManager().size());
@@ -54,11 +49,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigation {
     }
 
     protected void handleIntent(Intent intent) {
-        Uri data = intent.getData();
-        if (data != null) {
-            mRouteService.handleIntent(this, intent);
-        }
-
     }
 
     public void test() {

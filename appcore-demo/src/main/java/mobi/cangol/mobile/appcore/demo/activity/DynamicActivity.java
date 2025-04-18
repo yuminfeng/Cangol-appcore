@@ -18,13 +18,11 @@ import mobi.cangol.mobile.service.route.RouteService;
 
 public class DynamicActivity extends AppCompatActivity {
     private static final String TAG = "DynamicActivity";
-    private RouteService mRouteService;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mRouteService = ((CoreApplication) getApplication()).getAppService(AppService.ROUTE_SERVICE);
         handleIntent(getIntent());
         ((CoreApplication) getApplication()).addActivityToManager(this);
         this.setActionBar(new Toolbar(this));
@@ -48,17 +46,12 @@ public class DynamicActivity extends AppCompatActivity {
     }
 
     protected void handleIntent(Intent intent) {
-        Uri data = intent.getData();
-        if (data != null) {
-            mRouteService.handleIntent(this, intent);
-        } else {
-            String className = intent.getStringExtra("class");
-            Bundle bundle = intent.getBundleExtra("args");
-            try {
-                toFragment((Class<? extends Fragment>) Class.forName(className), bundle, false);
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
+        String className = intent.getStringExtra("class");
+        Bundle bundle = intent.getBundleExtra("args");
+        try {
+            toFragment((Class<? extends Fragment>) Class.forName(className), bundle, false);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
